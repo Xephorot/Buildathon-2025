@@ -141,13 +141,13 @@
     - Write tests for access request workflows
     - _Requirements: 4.2, 4.4_
 
-- [ ] 9. Develop insurance portal features
+- [ ] 9. Develop hospital portal features
 
-  - [ ] 9.1 Create insurance company dashboard
+  - [ ] 9.1 Create hospital company dashboard
 
     - Build interface for risk assessment and policy underwriting
     - Implement authorized document viewing for insurance representatives
-    - Write tests for insurance dashboard functionality
+    - Write tests for hospital dashboard functionality
     - _Requirements: 4.1, 6.1_
 
   - [ ] 9.2 Implement risk assessment tools
