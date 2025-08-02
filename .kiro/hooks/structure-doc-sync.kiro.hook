@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Structure Doc Updater",
+  "description": "Automatically updates the structure steering document whenever the project structure changes by monitoring file and folder operations",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "The project structure has changed. Please analyze the current file tree and update the structure.md steering document in .kiro/steering/ to reflect the new organization. Make sure to maintain the existing format but update the \"Current Organization\" section with the actual current structure, and adjust any recommendations in the \"Recommended Structure for Implementation\" section if needed based on the changes."
+  }
+}
