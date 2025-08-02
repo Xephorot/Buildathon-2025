@@ -2,6 +2,8 @@
 
 # MODIFY WITH MORE INFO ABOUT THE BUILDATHON
 
+# YOUR CRYPTO HEALTH
+
 A blockchain-based platform that empowers patients with complete sovereignty over their medical data while enabling secure, permissioned access for insurance companies. Built on Avalanche's private network infrastructure.
 
 ## Project Structure

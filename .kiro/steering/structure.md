@@ -8,14 +8,66 @@ inclusion: always
 
 ### Current Structure
 
-- `contracts/` - Solidity smart contracts for Avalanche blockchain
-- `frontend/` - React.js web application with Web3 integration
-- `scripts/` - Deployment and utility scripts
-- `tests/` - Test suites for contracts and frontend
-- `cache/` - Build artifacts and compilation cache
-- `Information/` - Project documentation and requirements
+```
+/
+├── .env.example         # Environment configuration template
+├── .git/               # Git repository metadata
+├── .gitignore          # Git ignore rules
+├── .kiro/              # Kiro IDE configuration
+│   ├── hooks/          # Agent hooks
+│   ├── specs/          # Project specifications
+│   └── steering/       # Steering rules and guidelines
+├── .vscode/            # VS Code configuration
+├── brainstorm/         # Project ideation documents
+│   ├── IDEA 1.docx
+│   ├── IDEA 2.docx
+│   ├── IDEA 3.docx
+│   └── IDEA 4.docx
+├── cache/              # Build artifacts and compilation cache
+│   └── solidity-files-cache.json
+├── contracts/          # Solidity smart contracts (currently empty)
+│   └── .gitkeep
+├── figma 2025.pdf      # Design specifications
+├── frontend/           # React.js web application
+│   ├── build/          # Production build output
+│   ├── node_modules/   # Frontend dependencies
+│   ├── public/         # Static assets
+│   ├── src/            # Source code
+│   ├── package.json    # Frontend package configuration
+│   └── package-lock.json
+├── hardhat.config.js   # Hardhat configuration for Avalanche
+├── images/             # Project images and assets
+│   └── Equipo.jpeg
+├── Information/        # Project documentation and requirements
+│   ├── Idea 2.pdf
+│   ├── Idea 2.txt
+│   └── Mas detalles.txt
+├── node_modules/       # Root dependencies
+├── package.json        # Root package configuration
+├── package-lock.json   # Dependency lock file
+├── README.md           # Project documentation
+├── scripts/            # Deployment and utility scripts
+│   ├── .gitkeep
+│   ├── deploy.js
+│   └── verify-setup.js
+└── tests/              # Test suites
+    ├── .gitkeep
+    ├── setup.test.js
+    └── test-helper.js
+```
 
-### Required Module Structure
+**Key Observations:**
+- Project uses traditional React structure in `frontend/` (not yet migrated to Scaffold-ETH 2)
+- Smart contracts directory exists but is currently empty
+- Hardhat configuration is present at root level
+- Test infrastructure is set up but minimal
+- Documentation and brainstorming materials are well-organized
+
+### Recommended Structure for Implementation
+
+**Current Status**: The project is in early stages with basic Hardhat setup and traditional React frontend. The following structure represents the target architecture after migrating to Scaffold-ETH 2 as outlined in the implementation tasks.
+
+**Target Structure (Post Scaffold-ETH 2 Migration):**
 
 ```
 contracts/
@@ -66,12 +118,20 @@ packages/hardhat/
 
 ### Frontend Architecture (Scaffold-ETH 2)
 
+**Migration Status**: Currently using traditional React setup in `frontend/` directory. Task 2 in the implementation plan covers migration to Scaffold-ETH 2.
+
+**Target Architecture:**
 - Next.js-based architecture with server-side rendering capabilities
 - Wagmi hooks with TypeScript autocompletions for contract interactions
 - RainbowKit for seamless wallet connection management
 - Custom Scaffold hooks extending base functionality for medical records
 - Built-in debugging tools and block explorer integration
 - Separate service layers for encryption, IPFS, and blockchain operations
+
+**Current Architecture:**
+- Traditional React.js application in `frontend/` directory
+- Basic Web3 integration setup
+- Standard React Router and component structure
 
 ### Security Patterns
 
