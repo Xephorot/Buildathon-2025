@@ -1,50 +1,60 @@
 {
-  "name": "medical-records-frontend",
-  "version": "0.1.0",
+  "name": "se-2",
+  "version": "0.0.1",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "web3": "^4.3.0",
-    "@walletconnect/web3-provider": "^1.8.0",
-    "ethers": "^6.14.0",
-    "ipfs-http-client": "^60.0.1",
-    "crypto-js": "^4.2.0",
-    "eccrypto": "^1.1.6",
-    "buffer": "^6.0.3"
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": "react-scripts start"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "account": "yarn hardhat:account",
+    "account:generate": "yarn workspace @se-2/hardhat account:generate",
+    "account:import": "yarn workspace @se-2/hardhat account:import",
+    "account:reveal-pk": "yarn workspace @se-2/hardhat account:reveal-pk",
+    "chain": "yarn hardhat:chain",
+    "compile": "yarn hardhat:compile",
+    "deploy": "yarn hardhat:deploy",
+    "fork": "yarn hardhat:fork",
+    "format": "yarn next:format && yarn hardhat:format",
+    "generate": "yarn account:generate",
+    "hardhat:account": "yarn workspace @se-2/hardhat account",
+    "hardhat:chain": "yarn workspace @se-2/hardhat chain",
+    "hardhat:check-types": "yarn workspace @se-2/hardhat check-types",
+    "hardhat:clean": "yarn workspace @se-2/hardhat clean",
+    "hardhat:compile": "yarn workspace @se-2/hardhat compile",
+    "hardhat:deploy": "yarn workspace @se-2/hardhat deploy",
+    "hardhat:flatten": "yarn workspace @se-2/hardhat flatten",
+    "hardhat:fork": "yarn workspace @se-2/hardhat fork",
+    "hardhat:format": "yarn workspace @se-2/hardhat format",
+    "hardhat:generate": "yarn workspace @se-2/hardhat generate",
+    "hardhat:hardhat-verify": "yarn workspace @se-2/hardhat hardhat-verify",
+    "hardhat:lint": "yarn workspace @se-2/hardhat lint",
+    "hardhat:lint-staged": "yarn workspace @se-2/hardhat lint-staged",
+    "hardhat:test": "yarn workspace @se-2/hardhat test",
+    "hardhat:verify": "yarn workspace @se-2/hardhat verify",
+    "postinstall": "husky install",
+    "ipfs": "yarn workspace @se-2/nextjs ipfs",
+    "lint": "yarn next:lint && yarn hardhat:lint",
+    "next:build": "yarn workspace @se-2/nextjs build",
+    "next:check-types": "yarn workspace @se-2/nextjs check-types",
+    "next:format": "yarn workspace @se-2/nextjs format",
+    "next:lint": "yarn workspace @se-2/nextjs lint",
+    "next:serve": "yarn workspace @se-2/nextjs serve",
+    "precommit": "lint-staged",
+    "start": "yarn workspace @se-2/nextjs dev",
+    "test": "yarn hardhat:test",
+    "vercel": "yarn workspace @se-2/nextjs vercel",
+    "vercel:login": "yarn workspace @se-2/nextjs vercel:login",
+    "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo",
+    "verify": "yarn hardhat:verify"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.2.1"
+    "husky": "~9.1.6",
+    "lint-staged": "~13.2.2"
+  },
+  "packageManager": "yarn@3.2.3",
+  "engines": {
+    "node": ">=20.18.3"
   }
 }

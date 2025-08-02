@@ -1,4 +1,5 @@
 import * as chains from "viem/chains";
+import { avalancheLocal } from "~~/utils/scaffold-eth/networks";
 
 export type BaseConfig = {
   targetNetworks: readonly chains.Chain[];
@@ -15,7 +16,7 @@ export const DEFAULT_ALCHEMY_API_KEY = "oKxs-03sij-U_N0iOlrSsZFr29-IqbuF";
 
 const scaffoldConfig = {
   // The networks on which your DApp is live
-  targetNetworks: [chains.hardhat],
+  targetNetworks: [chains.hardhat, chains.avalanche, chains.avalancheFuji, avalancheLocal],
   // The interval at which your front-end polls the RPC servers for new data (it has no effect if you only target the local network (default is 4000))
   pollingInterval: 30000,
   // This is ours Alchemy's default API key.
@@ -26,8 +27,11 @@ const scaffoldConfig = {
   // If you want to use a different RPC for a specific network, you can add it here.
   // The key is the chain ID, and the value is the HTTP RPC URL
   rpcOverrides: {
-    // Example:
-    // [chains.mainnet.id]: "https://mainnet.buidlguidl.com",
+    // Avalanche networks
+    [chains.avalanche.id]: "https://api.avax.network/ext/bc/C/rpc",
+    [chains.avalancheFuji.id]: "https://api.avax-test.network/ext/bc/C/rpc",
+    // Local Avalanche network (if running locally)
+    [avalancheLocal.id]: "http://localhost:9650/ext/bc/C/rpc",
   },
   // This is ours WalletConnect's default project ID.
   // You can get your own at https://cloud.walletconnect.com

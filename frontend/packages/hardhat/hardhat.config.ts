@@ -125,6 +125,22 @@ const config: HardhatUserConfig = {
       url: "https://alfajores-forno.celo-testnet.org",
       accounts: [deployerPrivateKey],
     },
+    // Avalanche networks
+    avalanche: {
+      url: "https://api.avax.network/ext/bc/C/rpc",
+      accounts: [deployerPrivateKey],
+      chainId: 43114,
+    },
+    avalancheFuji: {
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
+      accounts: [deployerPrivateKey],
+      chainId: 43113,
+    },
+    avalancheLocal: {
+      url: "http://localhost:9650/ext/bc/C/rpc",
+      accounts: [deployerPrivateKey],
+      chainId: 43112,
+    },
   },
   // Configuration for harhdat-verify plugin
   etherscan: {

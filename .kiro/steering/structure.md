@@ -25,87 +25,98 @@ inclusion: always
 │   └── IDEA 4.docx
 ├── cache/              # Build artifacts and compilation cache
 │   └── solidity-files-cache.json
-├── contracts/          # Solidity smart contracts (currently empty)
-│   └── .gitkeep
+├── contracts/          # Legacy smart contracts directory
+│   ├── .gitkeep
+│   └── AuditTrail.sol  # Basic audit trail contract
 ├── figma 2025.pdf      # Design specifications
-├── frontend/           # React.js web application
-│   ├── build/          # Production build output
-│   ├── node_modules/   # Frontend dependencies
-│   ├── public/         # Static assets
-│   ├── src/            # Source code
-│   ├── package.json    # Frontend package configuration
-│   └── package-lock.json
-├── hardhat.config.js   # Hardhat configuration for Avalanche
+├── frontend/           # Scaffold-ETH 2 monorepo structure
+│   ├── packages/
+│   │   ├── hardhat/    # Smart contract development environment
+│   │   │   ├── contracts/      # Solidity smart contracts
+│   │   │   │   ├── AccessControl.sol
+│   │   │   │   ├── AuditTrail.sol
+│   │   │   │   ├── MedicalRecords.sol
+│   │   │   │   └── YourContract.sol
+│   │   │   ├── deploy/         # Deployment scripts
+│   │   │   ├── test/           # Contract tests
+│   │   │   ├── typechain-types/ # Generated TypeScript types
+│   │   │   └── hardhat.config.ts
+│   │   └── nextjs/     # Next.js frontend application
+│   │       ├── app/            # Next.js app directory structure
+│   │       │   ├── blockexplorer/
+│   │       │   ├── debug/
+│   │       │   ├── insurance/  # Insurance company portal
+│   │       │   ├── patient/    # Patient dashboard
+│   │       │   ├── specialist/ # Medical specialist portal
+│   │       │   ├── layout.tsx
+│   │       │   └── page.tsx    # Landing page with role-based navigation
+│   │       ├── components/     # React components
+│   │       │   ├── scaffold-eth/
+│   │       │   ├── Footer.tsx
+│   │       │   ├── Header.tsx
+│   │       │   └── ThemeProvider.tsx
+│   │       ├── contracts/      # Contract deployment info
+│   │       ├── hooks/          # Custom React hooks
+│   │       │   └── scaffold-eth/
+│   │       ├── services/       # Web3 and store services
+│   │       ├── utils/          # Utility functions
+│   │       └── scaffold.config.ts
+│   ├── package.json    # Monorepo package configuration
+│   └── yarn.lock       # Yarn workspace lock file
+├── hardhat.config.js   # Legacy Hardhat configuration
 ├── images/             # Project images and assets
 │   └── Equipo.jpeg
 ├── Information/        # Project documentation and requirements
 │   ├── Idea 2.pdf
 │   ├── Idea 2.txt
 │   └── Mas detalles.txt
+├── medichaintest/      # Additional test environment
 ├── node_modules/       # Root dependencies
 ├── package.json        # Root package configuration
 ├── package-lock.json   # Dependency lock file
 ├── README.md           # Project documentation
-├── scripts/            # Deployment and utility scripts
+├── scripts/            # Legacy deployment scripts
 │   ├── .gitkeep
 │   ├── deploy.js
 │   └── verify-setup.js
-└── tests/              # Test suites
+└── tests/              # Legacy test suites
     ├── .gitkeep
     ├── setup.test.js
     └── test-helper.js
 ```
 
 **Key Observations:**
-- Project uses traditional React structure in `frontend/` (not yet migrated to Scaffold-ETH 2)
-- Smart contracts directory exists but is currently empty
-- Hardhat configuration is present at root level
-- Test infrastructure is set up but minimal
-- Documentation and brainstorming materials are well-organized
+- Project has successfully migrated to Scaffold-ETH 2 architecture
+- Smart contracts are now located in `frontend/packages/hardhat/contracts/`
+- Next.js frontend with role-based routing (patient, specialist, insurance)
+- TypeScript integration with auto-generated contract types
+- Yarn workspaces for monorepo management
+- Legacy structure still present for backward compatibility
 
-### Recommended Structure for Implementation
+### Implementation Status & Next Steps
 
-**Current Status**: The project is in early stages with basic Hardhat setup and traditional React frontend. The following structure represents the target architecture after migrating to Scaffold-ETH 2 as outlined in the implementation tasks.
+**Current Status**: The project has successfully completed the Scaffold-ETH 2 migration (Task 2 from implementation plan). The architecture is now properly structured for medical records development.
 
-**Target Structure (Post Scaffold-ETH 2 Migration):**
+**Completed Implementation:**
+- ✅ Scaffold-ETH 2 framework setup with Next.js, React, and TypeScript
+- ✅ Monorepo structure with separate hardhat and nextjs packages
+- ✅ Role-based routing structure (patient, specialist, insurance portals)
+- ✅ Basic smart contracts (AccessControl, MedicalRecords, AuditTrail)
+- ✅ TypeScript contract type generation
+- ✅ Landing page with role-based navigation
 
-```
-contracts/
-├── MedicalRecords.sol    # Core medical record storage contract
-├── AccessControl.sol     # Permission management contract
-└── migrations/           # Deployment scripts
+**Current Architecture Strengths:**
+- Clean separation between contract development and frontend
+- TypeScript integration throughout the stack
+- Built-in Web3 development tools and debugging
+- Scalable component organization by user role
+- Automated contract type generation for type safety
 
-packages/nextjs/
-├── components/
-│   ├── patient/         # Patient-specific UI components
-│   ├── insurer/         # Insurance company UI components
-│   ├── medic/           # Medical provider UI components
-│   └── scaffold-eth/    # Extended Scaffold-ETH 2 components
-├── hooks/
-│   ├── scaffold-eth/    # Custom Scaffold hooks for medical records
-│   ├── useEncryption.ts # ECIES encryption utilities hook
-│   ├── useIPFS.ts       # IPFS storage operations hook
-│   └── useMedicalRecords.ts # Medical records contract interactions
-├── pages/
-│   ├── patient/         # Patient dashboard and management
-│   ├── medic/           # Medical provider portal
-│   ├── insurance/       # Insurance company portal
-│   └── api/             # Next.js API routes for IPFS/encryption
-├── utils/
-│   ├── encryption.ts    # Cryptographic utilities
-│   ├── ipfs.ts         # IPFS client configuration
-│   └── scaffold-eth/    # Extended Scaffold utilities
-└── contracts/           # Contract ABIs and deployment info
-
-packages/hardhat/
-├── contracts/
-│   ├── MedicalRecords.sol
-│   ├── AccessControl.sol
-│   └── AuditTrail.sol
-├── deploy/              # Deployment scripts
-├── test/                # Contract tests
-└── hardhat.config.ts    # Avalanche network configuration
-```
+**Next Development Priorities:**
+1. **Smart Contract Implementation** (Task 3): Complete the core contract functionality
+2. **Encryption Services** (Task 4): Implement client-side ECIES encryption
+3. **IPFS Integration** (Task 5): Add document storage and retrieval
+4. **Role-specific UI Development** (Tasks 7-10): Build out the portal interfaces
 
 ## Architecture Patterns
 
@@ -118,20 +129,14 @@ packages/hardhat/
 
 ### Frontend Architecture (Scaffold-ETH 2)
 
-**Migration Status**: Currently using traditional React setup in `frontend/` directory. Task 2 in the implementation plan covers migration to Scaffold-ETH 2.
-
-**Target Architecture:**
-- Next.js-based architecture with server-side rendering capabilities
-- Wagmi hooks with TypeScript autocompletions for contract interactions
-- RainbowKit for seamless wallet connection management
-- Custom Scaffold hooks extending base functionality for medical records
-- Built-in debugging tools and block explorer integration
-- Separate service layers for encryption, IPFS, and blockchain operations
-
 **Current Architecture:**
-- Traditional React.js application in `frontend/` directory
-- Basic Web3 integration setup
-- Standard React Router and component structure
+- Next.js-based architecture with app directory routing
+- Wagmi hooks with TypeScript autocompletions for contract interactions
+- RainbowKit integration for wallet connection management
+- Custom Scaffold hooks for medical records functionality
+- Built-in debugging tools and block explorer
+- Separate service layers for Web3, store management, and utilities
+- Role-based page structure with dedicated portals for each user type
 
 ### Security Patterns
 
@@ -145,22 +150,24 @@ packages/hardhat/
 ### File Naming
 
 - Smart contracts: `PascalCase.sol` (e.g., `MedicalRecords.sol`)
-- Next.js pages: `kebab-case.tsx` (e.g., `patient-dashboard.tsx`)
+- Next.js app routes: `page.tsx`, `layout.tsx` in directory structure
 - React components: `PascalCase.tsx` (e.g., `PatientDashboard.tsx`)
 - Custom hooks: `usePascalCase.ts` (e.g., `useMedicalRecords.ts`)
 - Utilities: `camelCase.ts` (e.g., `encryptionUtils.ts`)
-- Constants: `UPPER_SNAKE_CASE.ts` (e.g., `CONTRACT_ADDRESSES.ts`)
+- Configuration: `*.config.ts` (e.g., `scaffold.config.ts`)
 - Test files: `*.test.ts` or `*.spec.ts`
 
 ### Development Rules
 
 - Use TypeScript throughout the entire stack (enforced by Scaffold-ETH 2)
-- Leverage Scaffold-ETH 2's automatic contract type generation
+- Leverage automatic contract type generation in `typechain-types/`
 - Include comprehensive JSDoc comments for utility functions
 - Implement proper error boundaries in React components
 - Use Scaffold's built-in environment variable management
 - Follow Solidity best practices (checks-effects-interactions pattern)
 - Utilize Scaffold's custom hooks for consistent contract interactions
+- Organize components by user role (patient/, specialist/, insurance/)
+- Use Next.js app directory routing for better performance and SEO
 
 ### Testing Requirements
 
