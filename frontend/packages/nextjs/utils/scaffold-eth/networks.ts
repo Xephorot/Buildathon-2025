@@ -1,5 +1,26 @@
 import * as chains from "viem/chains";
+import { defineChain } from "viem";
 import scaffoldConfig from "~~/scaffold.config";
+
+// Define custom local Avalanche network
+export const avalancheLocal = defineChain({
+  id: 43112,
+  name: "Avalanche Local",
+  nativeCurrency: {
+    decimals: 18,
+    name: "Avalanche",
+    symbol: "AVAX",
+  },
+  rpcUrls: {
+    default: {
+      http: ["http://localhost:9650/ext/bc/C/rpc"],
+    },
+  },
+  blockExplorers: {
+    default: { name: "Local Explorer", url: "http://localhost:9650" },
+  },
+  testnet: true,
+});
 
 type ChainAttributes = {
   // color | [lightThemeColor, darkThemeColor]
@@ -34,6 +55,8 @@ export const RPC_CHAIN_NAMES: Record<number, string> = {
   [chains.baseSepolia.id]: "base-sepolia",
   [chains.celo.id]: "celo-mainnet",
   [chains.celoAlfajores.id]: "celo-alfajores",
+  [chains.avalanche.id]: "avax-mainnet",
+  [chains.avalancheFuji.id]: "avax-fuji",
 };
 
 export const getAlchemyHttpUrl = (chainId: number) => {
@@ -89,6 +112,18 @@ export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
   },
   [chains.celoAlfajores.id]: {
     color: "#476520",
+  },
+  [chains.avalanche.id]: {
+    color: "#e84142",
+    nativeCurrencyTokenAddress: "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7", // WAVAX
+  },
+  [chains.avalancheFuji.id]: {
+    color: "#e84142",
+    nativeCurrencyTokenAddress: "0xd00ae08403B9bbb9124bB305C09058E32C39A48c", // WAVAX on Fuji
+  },
+  // Custom local Avalanche network
+  [avalancheLocal.id]: {
+    color: "#e84142",
   },
 };
 
