@@ -7,8 +7,11 @@
 - **Storage**: IPFS for encrypted medical document storage
 
 ## Frontend & User Interface
-- **Framework**: React.js for web application
-- **Wallet Integration**: Web3 wallet connectivity for patient and insurer access
+- **Framework**: Scaffold-ETH 2 (Next.js + React + TypeScript)
+- **Web3 Integration**: Built-in Wagmi hooks with TypeScript autocompletions
+- **Wallet Integration**: RainbowKit for seamless wallet connectivity (MetaMask, WalletConnect, etc.)
+- **Smart Contract Interaction**: Custom hooks for reading/writing to deployed contracts
+- **Development Tools**: Built-in contract debugging and block explorer
 - **Client-side Encryption**: Browser-based encryption before IPFS upload
 
 ## Cryptography & Security
@@ -22,14 +25,24 @@
 - **Risk Areas**: Cryptographic implementation, cross-user decryption flows
 
 ## Common Commands
-*Note: This is a conceptual project - specific build commands will depend on chosen implementation stack*
+*Using Scaffold-ETH 2 development stack*
 
 ```bash
-# Typical Web3 development setup
-npm install
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run test         # Run test suite
-truffle compile      # Compile smart contracts
-truffle migrate      # Deploy contracts
+# Scaffold-ETH 2 setup and development
+yarn install        # Install dependencies
+yarn chain          # Start local Hardhat network
+yarn deploy         # Deploy contracts to local network
+yarn start          # Start Next.js frontend
+yarn verify         # Verify contracts on network
+
+# Development workflow
+yarn compile        # Compile smart contracts
+yarn test           # Run contract tests
+yarn build          # Build for production
+yarn generate       # Generate account for deployment
+
+# Network-specific deployments
+yarn deploy --network avalanche-local
+yarn deploy --network avalanche-testnet
+yarn deploy --network avalanche-mainnet
 ```
