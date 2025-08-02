@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This project aims to create a decentralized medical records system that empowers patients with full sovereignty over their health data while enabling secure, permissioned access for private insurance companies. Built on Avalanche's private network infrastructure, the system addresses the critical problem of medical record portability and patient data ownership in Bolivia and the broader LATAM region, where medical histories are currently fragmented and controlled by individual clinics.
+This project aims to create a decentralized medical records system that empowers patients with full sovereignty over their health data while enabling secure, permissioned access for private hospitals. Built on Avalanche's private network infrastructure, the system addresses the critical problem of medical record portability and patient data ownership in Bolivia and the broader LATAM region, where medical histories are currently fragmented and controlled by individual clinics.
 
-The system will enable patients to encrypt and store their medical documents on IPFS, manage access permissions through smart contracts, and grant selective access to insurance companies for risk assessment and policy underwriting processes.
+The system will enable patients to encrypt and store their medical documents on IPFS, manage access permissions through smart contracts, and grant selective access to hospitals for risk assessment and policy underwriting processes.
 
 ## Requirements
 
@@ -38,7 +38,7 @@ The system will enable patients to encrypt and store their medical documents on 
 
 #### Acceptance Criteria
 
-1. WHEN a patient grants access THEN the system SHALL create a smart contract permission entry for the specified insurer
+1. WHEN a patient grants access THEN the system SHALL create a smart contract permission entry for the specified clinic
 2. WHEN setting permissions THEN the patient SHALL be able to specify which documents are accessible
 3. WHEN permissions are granted THEN the system SHALL set expiration dates for access rights
 4. IF a patient revokes access THEN the system SHALL immediately update the smart contract to deny further access
