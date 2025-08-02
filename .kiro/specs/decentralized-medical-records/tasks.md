@@ -1,6 +1,9 @@
 # Implementation Plan
 
-- [ ] 1. Set up project structure and development environment
+- [-] 1. Set up project structure and development environment
+
+
+
 
   - Create directory structure for contracts, frontend, and utilities
   - Initialize package.json files and install dependencies (React, Hardhat, IPFS, Web3 libraries)

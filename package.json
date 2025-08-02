@@ -1,0 +1,36 @@
+{
+  "name": "decentralized-medical-records",
+  "version": "1.0.0",
+  "description": "Decentralized medical records system for private insurance on Avalanche",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "test": "hardhat test",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js",
+    "install-all": "npm install && npm install --prefix frontend"
+  },
+  "keywords": [
+    "blockchain",
+    "medical-records",
+    "avalanche",
+    "ipfs",
+    "encryption",
+    "healthcare"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "chai": "^4.3.10",
+    "ethers": "^6.14.0",
+    "hardhat": "^2.19.4",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solidity-coverage": "^0.8.5"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.1",
+    "ipfs-http-client": "^60.0.1"
+  }
+}
