@@ -3,6 +3,7 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { DocumentIcon, ShieldCheckIcon, ClockIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const PatientDashboard: NextPage = () => {
   const { address: connectedAddress } = useAccount();
@@ -53,23 +54,35 @@ const PatientDashboard: NextPage = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-base-100 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Upload Medical Record</h3>
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-            <DocumentIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600 mb-4">Drag and drop your medical documents here</p>
-            <button className="btn btn-primary">Choose Files</button>
+          <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
+          <div className="space-y-3">
+            <Link href="/patient/upload" className="btn btn-primary w-full">
+              <DocumentIcon className="h-5 w-5" />
+              Upload New Record
+            </Link>
+            <Link href="/patient/records" className="btn btn-outline w-full">
+              <DocumentIcon className="h-5 w-5" />
+              View All Records
+            </Link>
+            <Link href="/patient/permissions" className="btn btn-outline w-full">
+              <ShieldCheckIcon className="h-5 w-5" />
+              Manage Permissions
+            </Link>
+            <Link href="/patient/activity" className="btn btn-outline w-full">
+              <ClockIcon className="h-5 w-5" />
+              Activity Log
+            </Link>
           </div>
         </div>
 
         <div className="bg-base-100 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Permission Management</h3>
+          <h3 className="text-xl font-semibold mb-4">Recent Activity</h3>
           <div className="space-y-4">
-            <div className="flex justify-between items-center p-4 border rounded-lg">
+            <div className="flex justify-between items-center p-3 border rounded-lg">
               <div>
-                <p className="font-medium">No active permissions</p>
-                <p className="text-sm text-gray-600">Grant access to medical professionals</p>
+                <p className="font-medium text-sm">No recent activity</p>
+                <p className="text-xs text-gray-600">Your recent uploads and permission changes will appear here</p>
               </div>
-              <button className="btn btn-sm btn-outline">Manage</button>
             </div>
           </div>
         </div>

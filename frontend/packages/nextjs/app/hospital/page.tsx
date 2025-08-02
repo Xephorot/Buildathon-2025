@@ -3,15 +3,16 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { ChartBarIcon, DocumentMagnifyingGlassIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
-const InsurancePortal: NextPage = () => {
+const HospitalPortal: NextPage = () => {
   const { address: connectedAddress } = useAccount();
 
   if (!connectedAddress) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Insurance Company Portal</h1>
+          <h1 className="text-2xl font-bold mb-4">Hospital Company Portal</h1>
           <p className="mb-4">Please connect your wallet to access risk assessment tools.</p>
         </div>
       </div>
@@ -53,28 +54,29 @@ const InsurancePortal: NextPage = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-base-100 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Patient Risk Assessment</h3>
-          <div className="space-y-4">
-            <input 
-              type="text" 
-              placeholder="Enter patient address for assessment" 
-              className="input input-bordered w-full"
-            />
-            <button className="btn btn-primary w-full">Start Risk Assessment</button>
-          </div>
-          <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-            <p className="text-gray-600 text-center">Enter patient address to begin assessment</p>
+          <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
+          <div className="space-y-3">
+            <Link href="/hospital/assessments/new" className="btn btn-primary w-full">
+              <ChartBarIcon className="h-5 w-5" />
+              New Risk Assessment
+            </Link>
+            <Link href="/hospital/assessments" className="btn btn-outline w-full">
+              <DocumentMagnifyingGlassIcon className="h-5 w-5" />
+              View All Assessments
+            </Link>
+            <button className="btn btn-outline w-full">
+              <ShieldCheckIcon className="h-5 w-5" />
+              Policy Management
+            </button>
           </div>
         </div>
 
         <div className="bg-base-100 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Underwriting Tools</h3>
+          <h3 className="text-xl font-semibold mb-4">Recent Activity</h3>
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <button className="btn btn-outline">Medical History</button>
-              <button className="btn btn-outline">Risk Scoring</button>
-              <button className="btn btn-outline">Policy Pricing</button>
-              <button className="btn btn-outline">Coverage Analysis</button>
+            <div className="p-4 border rounded-lg">
+              <p className="text-gray-600 text-center text-sm">No recent activity</p>
+              <p className="text-gray-500 text-xs text-center">Your recent assessments and policy updates will appear here</p>
             </div>
           </div>
         </div>
@@ -107,4 +109,4 @@ const InsurancePortal: NextPage = () => {
   );
 };
 
-export default InsurancePortal;
+export default HospitalPortal;

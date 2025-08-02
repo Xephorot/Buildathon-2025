@@ -68,7 +68,7 @@ const Home: NextPage = () => {
               <p className="mb-4">
                 Conduct risk assessment and policy underwriting with authorized access to patient data.
               </p>
-              <Link href="/insurance" passHref className="btn btn-primary">
+              <Link href="/hospital" passHref className="btn btn-primary">
                 Insurance Portal
               </Link>
             </div>

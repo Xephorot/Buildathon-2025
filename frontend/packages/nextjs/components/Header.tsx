@@ -31,8 +31,8 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <HeartIcon className="h-4 w-4" />,
   },
   {
-    label: "Insurance Portal",
-    href: "/insurance",
+    label: "Hospital Portal",
+    href: "/hospital",
     icon: <BuildingOffice2Icon className="h-4 w-4" />,
   },
   {

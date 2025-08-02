@@ -3,6 +3,7 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { DocumentIcon, UserGroupIcon, EyeIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const SpecialistPortal: NextPage = () => {
   const { address: connectedAddress } = useAccount();
@@ -53,27 +54,28 @@ const SpecialistPortal: NextPage = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-base-100 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Patient Search</h3>
-          <div className="space-y-4">
-            <input 
-              type="text" 
-              placeholder="Search by patient address or name" 
-              className="input input-bordered w-full"
-            />
-            <button className="btn btn-primary w-full">Search Patients</button>
-          </div>
-          <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-            <p className="text-gray-600 text-center">No patients found</p>
+          <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
+          <div className="space-y-3">
+            <Link href="/specialist/patients" className="btn btn-primary w-full">
+              <UserGroupIcon className="h-5 w-5" />
+              View All Patients
+            </Link>
+            <button className="btn btn-outline w-full">
+              Request Patient Access
+            </button>
+            <button className="btn btn-outline w-full">
+              Search Patient Records
+            </button>
           </div>
         </div>
 
         <div className="bg-base-100 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Access Requests</h3>
+          <h3 className="text-xl font-semibold mb-4">Recent Activity</h3>
           <div className="space-y-4">
             <div className="p-4 border rounded-lg">
-              <p className="text-gray-600 text-center">No pending access requests</p>
+              <p className="text-gray-600 text-center text-sm">No recent activity</p>
+              <p className="text-gray-500 text-xs text-center">Your recent patient record access will appear here</p>
             </div>
-            <button className="btn btn-outline w-full">Request Patient Access</button>
           </div>
         </div>
       </div>
