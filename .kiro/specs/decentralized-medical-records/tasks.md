@@ -2,12 +2,12 @@
 
 - [x] 1. Set up project structure and development environment
 
-
   - Create directory structure for contracts, frontend, and utilities
   - Initialize package.json files and install dependencies (React, Hardhat, IPFS, Web3 libraries)
   - Configure Hardhat for Avalanche network development
   - Set up testing frameworks (Jest, Hardhat testing)
-  - _Requirements: 5.1, 5.2_
+  - Create basic React routing structure with placeholder pages
+  - _Requirements: 5.1, 5.3_
 
 - [ ] 2. Transition frontend to Scaffold-ETH 2 architecture
 
@@ -16,7 +16,7 @@
     - Install and configure Scaffold-ETH 2 with Next.js, React, and TypeScript
     - Set up development environment with hot reloading and debugging tools
     - Configure build pipeline and deployment scripts for Scaffold-ETH 2
-    - _Requirements: 5.1, 5.2_
+    - _Requirements: 5.1, 5.3_
 
   - [ ] 2.2 Migrate existing components to Scaffold-ETH 2 structure
 
@@ -24,7 +24,7 @@
     - Convert React Router to Next.js routing system
     - Update state management to use Wagmi hooks and RainbowKit
     - Refactor utility functions and services for Scaffold integration
-    - _Requirements: 6.1, 6.2_
+    - _Requirements: 6.1, 6.4_
 
   - [ ] 2.3 Configure Scaffold-ETH 2 for Avalanche network
     - Update network configuration for Avalanche compatibility in Scaffold config
@@ -39,20 +39,20 @@
     - Write Solidity contract with grantAccess, revokeAccess, and checkPermission functions
     - Implement access control modifiers and events
     - Create comprehensive unit tests for permission logic
-    - _Requirements: 3.1, 3.2, 3.3, 3.4_
+    - _Requirements: 3.1, 3.2, 3.4, 3.5_
 
   - [ ] 3.2 Create MedicalRecords contract for document metadata
 
     - Write contract with addDocument, getDocument, and updateDocumentMetadata functions
     - Implement document ownership and metadata storage
     - Create unit tests for document management operations
-    - _Requirements: 2.2, 2.5_
+    - _Requirements: 1.3, 2.2_
 
   - [ ] 3.3 Create AuditTrail contract for compliance logging
     - Write contract with logAccess, logPermissionChange, and getAuditTrail functions
     - Implement immutable audit log storage
     - Create unit tests for audit logging functionality
-    - _Requirements: 7.1, 7.2, 7.3, 7.5_
+    - _Requirements: 7.1, 7.2, 7.5_
 
 - [ ] 4. Implement client-side encryption services
 
@@ -67,7 +67,7 @@
     - Create functions for re-encrypting symmetric keys for authorized parties
     - Implement key derivation and secure key handling
     - Write integration tests for encryption delegation flow
-    - _Requirements: 3.1, 3.2, 4.2, 4.3_
+    - _Requirements: 3.1, 3.2, 4.2_
 
 - [ ] 5. Create IPFS integration service
 
@@ -119,7 +119,7 @@
     - Create medical record upload and management interface
     - Implement permission management UI components
     - Write tests for patient dashboard functionality
-    - _Requirements: 1.3, 3.2, 6.2_
+    - _Requirements: 1.3, 3.2, 6.1_
 
 - [ ] 8. Implement patient-specific features
 
@@ -163,7 +163,7 @@
     - Build interface for requesting access to patient records
     - Implement notification system for access requests
     - Write tests for access request workflows
-    - _Requirements: 4.2, 4.4_
+    - _Requirements: 4.2, 4.5_
 
 - [ ] 10. Develop hospital portal features
 
@@ -193,7 +193,7 @@
     - Create event listeners for blockchain events
     - Implement real-time UI updates for permission changes
     - Write tests for real-time functionality
-    - _Requirements: 3.4, 6.2_
+    - _Requirements: 3.5, 6.2_
 
 - [ ] 12. Add comprehensive error handling and user feedback
 
