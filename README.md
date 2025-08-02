@@ -43,12 +43,14 @@ A blockchain-based platform that empowers patients with complete sovereignty ove
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd decentralized-medical-records
 ```
 
 2. Install dependencies:
+
 ```bash
 npm run install-all
 ```
@@ -101,11 +103,13 @@ The project is configured for multiple Avalanche networks:
 ## Testing
 
 ### Smart Contract Tests
+
 ```bash
 npx hardhat test
 ```
 
 ### Frontend Tests
+
 ```bash
 cd frontend
 npm test
