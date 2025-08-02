@@ -34,7 +34,7 @@ The system will enable patients to encrypt and store their medical documents on 
 
 ### Requirement 3: Granular Access Control and Permissions
 
-**User Story:** As a patient, I want to grant specific permissions to insurance companies to access selected medical records, so that I can control exactly what information is shared and with whom.
+**User Story:** As a patient, I want to grant specific permissions to hospitals to access selected medical records, so that I can control exactly what information is shared and with whom.
 
 #### Acceptance Criteria
 
