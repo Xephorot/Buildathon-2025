@@ -110,14 +110,47 @@ inclusion: always
 │   │       │   ├── react-loadable-manifest.json
 │   │       │   └── trace
 │   │       ├── app/            # Next.js app directory structure
-│   │       │   ├── blockexplorer/
-│   │       │   ├── debug/
-│   │       │   ├── insurance/  # Insurance company portal
-│   │       │   ├── patient/    # Patient dashboard
-│   │       │   ├── specialist/ # Medical specialist portal
+│   │       │   ├── blockexplorer/      # Built-in block explorer
+│   │       │   │   ├── _components/    # Block explorer components
+│   │       │   │   ├── address/        # Address detail pages
+│   │       │   │   ├── transaction/    # Transaction detail pages
+│   │       │   │   ├── layout.tsx
+│   │       │   │   └── page.tsx
+│   │       │   ├── debug/              # Contract debugging interface
+│   │       │   │   ├── _components/    # Debug components
+│   │       │   │   └── page.tsx
+│   │       │   ├── hospital/           # Hospital/Insurance company portal
+│   │       │   │   ├── assessments/    # Hospital risk assessment and underwriting
+│   │       │   │   │   ├── new/        # New assessment creation
+│   │       │   │   │   │   └── page.tsx
+│   │       │   │   │   └── page.tsx    # Assessment list
+│   │       │   │   └── page.tsx        # Hospital dashboard home
+│   │       │   ├── insurance/          # Insurance company portal (planned - not yet implemented)
+│   │       │   │   ├── assessments/    # Risk assessment and underwriting (planned)
+│   │       │   │   │   ├── new/        # New assessment creation (planned)
+│   │       │   │   │   │   └── page.tsx
+│   │       │   │   │   └── page.tsx    # Assessment list (planned)
+│   │       │   │   └── page.tsx        # Insurance dashboard home (planned)
+│   │       │   ├── patient/            # Patient dashboard and management
+│   │       │   │   ├── activity/       # Patient activity and audit logs
+│   │       │   │   │   └── page.tsx
+│   │       │   │   ├── permissions/    # Access permission management
+│   │       │   │   │   └── page.tsx
+│   │       │   │   ├── records/        # Patient's medical records view
+│   │       │   │   │   └── page.tsx
+│   │       │   │   ├── upload/         # Document upload interface
+│   │       │   │   │   └── page.tsx
+│   │       │   │   └── page.tsx        # Patient dashboard home
+│   │       │   ├── specialist/         # Medical specialist portal
+│   │       │   │   ├── patients/       # Patient management for specialists
+│   │       │   │   │   ├── [patientId]/ # Dynamic patient-specific routes
+│   │       │   │   │   │   └── records/ # Patient record viewing for specialists
+│   │       │   │   │   │       └── page.tsx
+│   │       │   │   │   └── page.tsx    # Patient list for specialists
+│   │       │   │   └── page.tsx        # Specialist dashboard home
 │   │       │   ├── layout.tsx
 │   │       │   ├── not-found.tsx
-│   │       │   └── page.tsx    # Landing page with role-based navigation
+│   │       │   └── page.tsx            # Landing page with role-based navigation
 │   │       ├── components/     # React components
 │   │       │   ├── assets/
 │   │       │   ├── scaffold-eth/
@@ -189,26 +222,43 @@ inclusion: always
 **Key Observations:**
 - Project has successfully migrated to Scaffold-ETH 2 architecture with Yarn 3.2.3 workspaces
 - Smart contracts are located in both legacy `contracts/` and active `frontend/packages/hardhat/contracts/`
-- Complete Next.js 15 frontend with role-based routing (patient, specialist, insurance)
+- Complete Next.js 15 frontend with role-based routing (patient, specialist, hospital, insurance)
 - TypeScript integration with auto-generated contract types in `typechain-types/`
 - Comprehensive development tooling (ESLint, Prettier, Husky, lint-staged)
 - Yarn workspaces for monorepo management with proper dependency isolation
 - Legacy structure maintained for backward compatibility and migration reference
 - Kiro IDE integration with specifications and steering documents
 
+**Recent Additions:**
+- Patient activity logging system with comprehensive audit trail interface
+- Hospital portal with complete risk assessment and policy underwriting framework
+- Enhanced portal structure with dedicated hospital company functionality
+- Activity filtering and export capabilities for compliance reporting
+- Complete hospital assessment workflow with 4-step process (Patient Search, Record Selection, Risk Analysis, Review & Submit)
+- Interactive risk assessment interface with real-time risk score calculation
+- Comprehensive assessment review system with patient information and selected records display
+- Progress tracking system with visual step indicators and validation
+
 ### Implementation Status & Next Steps
 
-**Current Status**: The project has successfully completed the Scaffold-ETH 2 migration and basic infrastructure setup (Tasks 1-2 from implementation plan). The architecture is fully structured and ready for core feature development.
+**Current Status**: The project has successfully completed the Scaffold-ETH 2 migration and basic infrastructure setup (Tasks 1-2 from implementation plan). The architecture is fully structured with comprehensive portal interfaces and ready for core smart contract and encryption implementation. Recent major completion includes the full hospital assessment workflow with interactive risk evaluation tools. The system now has a complete hospital portal ready for backend integration.
 
 **Completed Implementation:**
 - ✅ Scaffold-ETH 2 framework setup with Next.js 15, React 19, and TypeScript
 - ✅ Yarn 3.2.3 workspaces monorepo structure with separate hardhat and nextjs packages
-- ✅ Role-based routing structure with dedicated portals (patient/, specialist/, insurance/)
+- ✅ Role-based routing structure with dedicated portals (patient/, specialist/, hospital/, insurance/)
 - ✅ Smart contracts foundation (AccessControl, MedicalRecords, AuditTrail, YourContract)
 - ✅ TypeScript contract type generation with typechain
 - ✅ Deployment scripts for all medical records contracts
 - ✅ Development tooling (ESLint, Prettier, Husky git hooks, lint-staged)
 - ✅ Landing page with role-based navigation structure
+- ✅ Patient portal structure with records, permissions, upload, and activity monitoring
+- ✅ Patient activity logging interface with comprehensive audit trail
+- ✅ Specialist portal with patient management and dynamic record viewing
+- ✅ Hospital portal with risk assessment and policy underwriting framework
+- 🚧 Insurance portal with risk assessment and policy underwriting framework (planned)
+- ✅ Complete hospital assessment workflow with multi-step interface
+- ✅ Interactive risk assessment tools with real-time calculations
 - ✅ Comprehensive project specifications and requirements documentation
 
 **Current Architecture Strengths:**
@@ -217,12 +267,36 @@ inclusion: always
 - Built-in Web3 development tools and debugging
 - Scalable component organization by user role
 - Automated contract type generation for type safety
+- Dynamic routing for patient-specific specialist workflows
+- Comprehensive portal structure for all user types (patients, specialists, hospitals, insurance) with assessment capabilities
+- Complete audit trail system with activity logging and filtering
+- Risk assessment framework for insurance underwriting
+- Responsive design with Tailwind CSS and DaisyUI components
+
+**Portal Structure Details:**
+- **Patient Portal** (`/patient`): Complete workflow with records management, permission controls, document upload, and activity monitoring
+  - `/patient/activity`: Activity logs and audit trail viewing
+  - `/patient/permissions`: Access permission management
+  - `/patient/records`: Medical records viewing and management
+  - `/patient/upload`: Document upload interface
+- **Specialist Portal** (`/specialist`): Patient list view with dynamic routing to individual patient records (`/specialist/patients/[patientId]/records`)
+- **Hospital Portal** (`/hospital`): Complete hospital-based medical record access with comprehensive risk assessment functionality
+  - `/hospital/assessments`: Assessment management and history
+  - `/hospital/assessments/new`: Complete 4-step risk assessment workflow (Patient Search → Record Selection → Risk Analysis → Review & Submit)
+- **Insurance Portal** (`/insurance`): Risk assessment and policy underwriting functionality (planned - to mirror hospital portal)
+  - `/insurance/assessments`: Assessment management and history (planned)
+  - `/insurance/assessments/new`: New risk assessment creation (planned)
+- **Built-in Tools**: Block explorer (`/blockexplorer`) and contract debugging (`/debug`) for development
 
 **Next Development Priorities:**
 1. **Smart Contract Implementation** (Task 3): Complete the core contract functionality
 2. **Encryption Services** (Task 4): Implement client-side ECIES encryption
 3. **IPFS Integration** (Task 5): Add document storage and retrieval
-4. **Role-specific UI Development** (Tasks 7-10): Build out the portal interfaces
+4. **Portal Interface Development** (Tasks 7-10): Complete the UI functionality for remaining portals
+5. **Patient Activity System** (Task 8.3): Implement the activity logging and audit trail functionality
+6. **Insurance Portal Implementation** (Task 10): Create insurance portal mirroring hospital assessment workflow
+7. **Patient-Specialist Workflow** (Task 9): Implement the specialist record viewing and access request flows
+8. **Backend Integration**: Connect hospital assessment interface with smart contracts and IPFS storage
 
 ## Architecture Patterns
 
@@ -276,7 +350,8 @@ inclusion: always
 - Use Scaffold's built-in environment variable management
 - Follow Solidity best practices (checks-effects-interactions pattern)
 - Utilize Scaffold's custom hooks for consistent contract interactions
-- Organize components by user role (patient/, specialist/, insurance/)
+- Organize components by user role (patient/, specialist/, hospital/)
+- Use dynamic routing for patient-specific specialist views ([patientId])
 - Use Next.js 15 app directory routing for better performance and SEO
 - Follow Yarn 3.2.3 workspace conventions for dependency management
 - Use Husky git hooks for pre-commit linting and formatting
