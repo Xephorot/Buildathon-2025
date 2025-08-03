@@ -3,8 +3,7 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { ShieldCheckIcon, ClockIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { ShieldCheckIcon, ClockIcon, UserIcon } from "@heroicons/react/24/outline";
 import PatientSidebar from "~~/components/PatientSidebar";
 
 interface Permission {
@@ -167,7 +166,7 @@ const PatientPermissions: NextPage = () => {
             <div className="text-center py-8 text-gray-600">
               <ShieldCheckIcon className="h-12 w-12 mx-auto mb-4 text-gray-400" />
               <p>No se han otorgado permisos aún</p>
-              <p className="text-sm">Haz clic en "Otorgar Nuevo Acceso" para compartir tus registros médicos</p>
+              <p className="text-sm">Haz clic en &quot;Otorgar Nuevo Acceso&quot; para compartir tus registros médicos</p>
             </div>
           )}
         </div>
