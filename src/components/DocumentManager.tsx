@@ -161,8 +161,8 @@ const DocumentManager: React.FC = () => {
         <div className="flex items-center space-x-3">
           <FileText className="h-8 w-8 text-blue-600" />
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Gestión de Documentos</h2>
-            <p className="text-gray-600">Administra las historias clínicas y documentos médicos</p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Gestión de Documentos</h2>
+            <p className="text-gray-600 dark:text-gray-400">Administra las historias clínicas y documentos médicos</p>
           </div>
         </div>
         
@@ -176,7 +176,7 @@ const DocumentManager: React.FC = () => {
       </div>
 
       {/* Filtros y búsqueda */}
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
           <div className="flex-1">
             <div className="relative">
@@ -207,11 +207,11 @@ const DocumentManager: React.FC = () => {
       </div>
 
       {/* Lista de documentos */}
-      <div className="bg-white rounded-lg shadow-md">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
         {loading ? (
           <div className="p-12 text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Cargando documentos...</p>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando documentos...</p>
           </div>
         ) : filteredDocuments.length > 0 ? (
           <div className="divide-y divide-gray-200">
@@ -220,13 +220,13 @@ const DocumentManager: React.FC = () => {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
-                      <h3 className="text-lg font-semibold text-gray-900">{doc.title}</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{doc.title}</h3>
                       <span className={`px-2 py-1 text-xs font-medium rounded-full ${getDocumentTypeColor(doc.documentType)}`}>
                         {DOCUMENT_TYPE_LABELS[doc.documentType]}
                       </span>
                     </div>
                     
-                    <p className="text-gray-600 mb-3">{doc.description}</p>
+                    <p className="text-gray-600 dark:text-gray-400 mb-3">{doc.description}</p>
                     
                     <div className="flex flex-wrap items-center space-x-4 text-sm text-gray-500">
                       <div className="flex items-center space-x-1">
@@ -277,9 +277,9 @@ const DocumentManager: React.FC = () => {
       {/* Modal para agregar documento */}
       {showAddForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Nuevo Documento Médico</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Nuevo Documento Médico</h3>
             </div>
             
             <div className="p-6 space-y-4">
@@ -367,7 +367,7 @@ const DocumentManager: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-200 flex space-x-3">
+            <div className="p-6 border-t border-gray-200 dark:border-gray-700 flex space-x-3">
               <button
                 onClick={handleAddDocument}
                 disabled={loading || !newDocument.ipfsHash || !newDocument.title || !newDocument.description}

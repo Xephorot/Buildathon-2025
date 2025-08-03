@@ -175,8 +175,8 @@ const PermissionManager: React.FC = () => {
         <div className="flex items-center space-x-3">
           <Shield className="h-8 w-8 text-blue-600" />
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Gestión de Permisos</h2>
-            <p className="text-gray-600">Controla quién tiene acceso a tus historias clínicas</p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Gestión de Permisos</h2>
+            <p className="text-gray-600 dark:text-gray-400">Controla quién tiene acceso a tus historias clínicas</p>
           </div>
         </div>
         
@@ -190,7 +190,7 @@ const PermissionManager: React.FC = () => {
       </div>
 
       {/* Búsqueda */}
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
           <input
