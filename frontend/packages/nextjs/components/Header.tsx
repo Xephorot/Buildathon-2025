@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { hardhat } from "viem/chains";
 import { Bars3Icon, BugAntIcon, UserIcon, HeartIcon, BuildingOffice2Icon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
+import { SwitchTheme } from "~~/components/SwitchTheme";
 import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
 
 type HeaderMenuLink = {
@@ -48,15 +49,16 @@ export const HeaderMenuLinks = () => {
   return (
     <>
       {menuLinks.map(({ label, href, icon }) => {
-        const isActive = pathname === href;
+        // Check if current path starts with the menu item path (for sub-routes)
+        const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
         return (
           <li key={href}>
             <Link
               href={href}
               passHref
               className={`${
-                isActive ? "bg-blue-600 shadow-md" : ""
-              } hover:bg-blue-600 hover:shadow-md focus:!bg-blue-600 active:!text-white py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col`}
+                isActive ? "bg-blue-600 shadow-md text-white" : "text-white"
+              } hover:bg-blue-600 hover:shadow-md focus:!bg-blue-600 active:!text-white py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col transition-colors`}
             >
               {icon}
               <span>{label}</span>
@@ -107,6 +109,7 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end grow mr-4">
+        <SwitchTheme className="mr-4" />
         <RainbowKitCustomConnectButton />
         {isLocalNetwork && <FaucetButton />}
       </div>

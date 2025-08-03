@@ -3,23 +3,26 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
+import Link from "next/link";
+import PatientSidebar from "~~/components/PatientSidebar";
 import { 
   DocumentTextIcon, 
   ClipboardDocumentListIcon,
   UserIcon,
-  ClockIcon
+  ClockIcon,
+  ShieldCheckIcon,
+  CloudArrowUpIcon
 } from "@heroicons/react/24/outline";
 
 const PatientDashboard: NextPage = () => {
   const { address: connectedAddress } = useAccount();
   const [patientName, setPatientName] = useState("Juan Pérez");
-  const [walletAddress] = useState("0x123abc...");
 
   if (!connectedAddress) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-900">
-        <div className="text-center text-white">
-          <h1 className="text-2xl font-bold mb-4">Panel del paciente</h1>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Panel del Paciente</h1>
           <p className="mb-4">Por favor conecta tu wallet para acceder a tus registros médicos.</p>
         </div>
       </div>
@@ -27,44 +30,107 @@ const PatientDashboard: NextPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-base-200">
       <div className="flex">
-        {/* Sidebar */}
-        <div className="w-64 bg-slate-800 min-h-screen p-6">
-          <h2 className="text-xl font-bold mb-8">Panel del paciente</h2>
-          
-          <nav className="space-y-2">
-            <div className="flex items-center space-x-3 bg-slate-700 p-3 rounded-lg">
-              <DocumentTextIcon className="h-5 w-5" />
-              <span>Registro de Datos</span>
-            </div>
-            
-            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 cursor-pointer">
-              <ClipboardDocumentListIcon className="h-5 w-5" />
-              <span>Lista de Documentos Médicos</span>
-            </div>
-            
-            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 cursor-pointer">
-              <UserIcon className="h-5 w-5" />
-              <span>Mi perfil</span>
-            </div>
-          </nav>
-        </div>
+        <PatientSidebar />
 
         {/* Main Content */}
         <div className="flex-1 p-8">
-          <h1 className="text-3xl font-bold mb-8">Registro de Datos</h1>
-          
-          {/* Patient Data Form */}
-          <div className="bg-slate-800 p-6 rounded-lg mb-8">
-            <div className="grid grid-cols-2 gap-6 mb-6">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold mb-2">Bienvenido, {patientName}</h1>
+            <p className="text-gray-600">Gestiona tus registros médicos de forma segura y descentralizada</p>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <ClipboardDocumentListIcon className="h-8 w-8 text-primary mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Documentos</h3>
+              <div className="text-2xl font-bold text-primary">4</div>
+              <p className="text-sm text-gray-500">Registros médicos</p>
+            </div>
+
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <ShieldCheckIcon className="h-8 w-8 text-success mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Permisos Activos</h3>
+              <div className="text-2xl font-bold text-success">2</div>
+              <p className="text-sm text-gray-500">Accesos otorgados</p>
+            </div>
+
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <ClockIcon className="h-8 w-8 text-info mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Actividad</h3>
+              <div className="text-2xl font-bold text-info">12</div>
+              <p className="text-sm text-gray-500">Eventos recientes</p>
+            </div>
+
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <UserIcon className="h-8 w-8 text-warning mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Perfil</h3>
+              <div className="text-sm font-bold text-warning">Completo</div>
+              <p className="text-sm text-gray-500">Estado del perfil</p>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Acciones Rápidas</h3>
+              <div className="space-y-3">
+                <Link href="/patient/upload" className="btn btn-primary w-full">
+                  <CloudArrowUpIcon className="h-5 w-5" />
+                  Subir Nuevo Documento
+                </Link>
+                <Link href="/patient/permissions" className="btn btn-outline w-full">
+                  <ShieldCheckIcon className="h-5 w-5" />
+                  Gestionar Permisos
+                </Link>
+                <Link href="/patient/records" className="btn btn-outline w-full">
+                  <ClipboardDocumentListIcon className="h-5 w-5" />
+                  Ver Mis Registros
+                </Link>
+              </div>
+            </div>
+
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Actividad Reciente</h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 p-3 border rounded-lg">
+                  <DocumentTextIcon className="h-5 w-5 text-primary" />
+                  <div>
+                    <p className="font-medium">Documento subido</p>
+                    <p className="text-sm text-gray-600">Prescription - Antibiotics</p>
+                    <p className="text-xs text-gray-500">Hace 2 horas</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-3 border rounded-lg">
+                  <ShieldCheckIcon className="h-5 w-5 text-success" />
+                  <div>
+                    <p className="font-medium">Permiso otorgado</p>
+                    <p className="text-sm text-gray-600">Dr. Maria Rodriguez</p>
+                    <p className="text-xs text-gray-500">Hace 1 día</p>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <Link href="/patient/activity" className="btn btn-ghost btn-sm">
+                    Ver todo el historial →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Patient Information */}
+          <div className="bg-base-100 p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-4">Información del Paciente</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium mb-2">Nombre del Paciente</label>
                 <input
                   type="text"
                   value={patientName}
                   onChange={(e) => setPatientName(e.target.value)}
-                  className="w-full bg-slate-700 text-white p-3 rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none"
+                  className="input input-bordered w-full"
                 />
               </div>
               
@@ -72,44 +138,17 @@ const PatientDashboard: NextPage = () => {
                 <label className="block text-sm font-medium mb-2">Dirección de Wallet</label>
                 <input
                   type="text"
-                  value={walletAddress}
+                  value={connectedAddress}
                   readOnly
-                  className="w-full bg-slate-700 text-gray-400 p-3 rounded-lg border border-slate-600"
+                  className="input input-bordered w-full bg-base-200"
                 />
               </div>
             </div>
             
-            <div className="flex justify-end">
-              <button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors">
-                Subir Nuevo Dato
+            <div className="flex justify-end mt-4">
+              <button className="btn btn-primary">
+                Actualizar Perfil
               </button>
-            </div>
-          </div>
-
-          {/* Additional Patient Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-slate-800 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4 flex items-center">
-                <ClipboardDocumentListIcon className="h-6 w-6 mr-2" />
-                Documentos Médicos
-              </h3>
-              <div className="space-y-3">
-                <div className="p-3 bg-slate-700 rounded-lg">
-                  <p className="text-sm text-gray-300">No hay documentos médicos registrados</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-slate-800 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4 flex items-center">
-                <ClockIcon className="h-6 w-6 mr-2" />
-                Actividad Reciente
-              </h3>
-              <div className="space-y-3">
-                <div className="p-3 bg-slate-700 rounded-lg">
-                  <p className="text-sm text-gray-300">No hay actividad reciente</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -165,6 +165,7 @@ inclusion: always
 │   │       │   ├── scaffold-eth/
 │   │       │   ├── Footer.tsx
 │   │       │   ├── Header.tsx
+│   │       │   ├── PatientSidebar.tsx
 │   │       │   ├── ScaffoldEthAppWithProviders.tsx
 │   │       │   ├── SwitchTheme.tsx
 │   │       │   └── ThemeProvider.tsx
@@ -253,6 +254,7 @@ inclusion: always
 - Progress tracking system with visual step indicators and validation
 - Updated landing page with modern gradient design and Spanish UI elements
 - Insurance compliance dashboard with audit trail viewing and risk assessment statistics
+- PatientSidebar component for consistent navigation across patient portal pages
 
 ### Implementation Status & Next Steps
 
@@ -275,6 +277,7 @@ inclusion: always
 - ✅ Complete hospital assessment workflow with multi-step interface
 - ✅ Interactive risk assessment tools with real-time calculations
 - ✅ Comprehensive project specifications and requirements documentation
+- ✅ PatientSidebar component for consistent navigation across patient portal pages
 
 **Current Architecture Strengths:**
 - Clean separation between contract development and frontend

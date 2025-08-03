@@ -9,7 +9,10 @@ import {
   ClipboardDocumentListIcon,
   UserGroupIcon,
   ShieldCheckIcon,
-  ChartBarIcon
+  ChartBarIcon,
+  HomeIcon,
+  ExclamationTriangleIcon,
+  CheckCircleIcon
 } from "@heroicons/react/24/outline";
 
 const InsurancePortal: NextPage = () => {
@@ -23,8 +26,8 @@ const InsurancePortal: NextPage = () => {
 
   if (!connectedAddress) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-900">
-        <div className="text-center text-white">
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Portal de Compliance/Audit</h1>
           <p className="mb-4">Por favor conecta tu wallet para acceder al sistema de evaluación de riesgos.</p>
         </div>
@@ -33,147 +36,196 @@ const InsurancePortal: NextPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-base-200">
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-64 bg-slate-800 min-h-screen p-6">
-          <h2 className="text-xl font-bold mb-8">Portal Compliance</h2>
+        <div className="w-64 bg-base-100 min-h-screen p-6 shadow-lg">
+          <h2 className="text-xl font-bold mb-8 text-primary">Portal Compliance</h2>
           
           <nav className="space-y-2">
-            <div className="flex items-center space-x-3 bg-slate-700 p-3 rounded-lg">
-              <MagnifyingGlassIcon className="h-5 w-5" />
-              <span>Buscar Paciente</span>
+            <div className="flex items-center space-x-3 bg-primary text-primary-content p-3 rounded-lg">
+              <HomeIcon className="h-5 w-5" />
+              <span>Dashboard</span>
             </div>
             
-            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 cursor-pointer">
+            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-base-200 cursor-pointer transition-colors">
               <ChartBarIcon className="h-5 w-5" />
               <span>Evaluaciones de Riesgo</span>
             </div>
             
-            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 cursor-pointer">
-              <DocumentTextIcon className="h-5 w-5" />
-              <span>Documentos Autorizados</span>
-            </div>
-            
-            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 cursor-pointer">
+            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-base-200 cursor-pointer transition-colors">
               <ClipboardDocumentListIcon className="h-5 w-5" />
               <span>Historial de Auditoría</span>
             </div>
             
-            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 cursor-pointer">
+            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-base-200 cursor-pointer transition-colors">
+              <DocumentTextIcon className="h-5 w-5" />
+              <span>Documentos Autorizados</span>
+            </div>
+            
+            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-base-200 cursor-pointer transition-colors">
+              <ShieldCheckIcon className="h-5 w-5" />
+              <span>Verificación de Cumplimiento</span>
+            </div>
+            
+            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-base-200 cursor-pointer transition-colors">
               <UserGroupIcon className="h-5 w-5" />
               <span>Solicitudes de Acceso</span>
             </div>
             
-            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 cursor-pointer">
-              <ShieldCheckIcon className="h-5 w-5" />
-              <span>Verificación de Cumplimiento</span>
+            <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-base-200 cursor-pointer transition-colors">
+              <MagnifyingGlassIcon className="h-5 w-5" />
+              <span>Buscar Paciente</span>
             </div>
           </nav>
         </div>
 
         {/* Main Content */}
         <div className="flex-1 p-8">
-          {/* Search Section */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-6">Evaluación de Riesgos</h1>
-            
-            <div className="bg-slate-800 p-6 rounded-lg mb-6">
-              <div className="flex gap-4">
+            <h1 className="text-3xl font-bold mb-2">Dashboard de Compliance y Auditoría</h1>
+            <p className="text-gray-600">Supervisión y evaluación de riesgos con datos autorizados de pacientes</p>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <ChartBarIcon className="h-8 w-8 text-primary mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Evaluaciones Totales</h3>
+              <div className="text-2xl font-bold text-primary">156</div>
+              <p className="text-sm text-gray-500">Evaluaciones completadas</p>
+            </div>
+
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <ExclamationTriangleIcon className="h-8 w-8 text-warning mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Riesgo Promedio</h3>
+              <div className="text-2xl font-bold text-warning">Medio</div>
+              <p className="text-sm text-gray-500">Nivel de riesgo</p>
+            </div>
+
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <CheckCircleIcon className="h-8 w-8 text-success mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Cumplimiento</h3>
+              <div className="text-2xl font-bold text-success">98.5%</div>
+              <p className="text-sm text-gray-500">Nivel de cumplimiento</p>
+            </div>
+
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <DocumentTextIcon className="h-8 w-8 text-info mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Auditorías</h3>
+              <div className="text-2xl font-bold text-info">24</div>
+              <p className="text-sm text-gray-500">Este mes</p>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Acciones Rápidas</h3>
+              <div className="space-y-3">
+                <button className="btn btn-primary w-full">
+                  <ChartBarIcon className="h-5 w-5" />
+                  Nueva Evaluación de Riesgo
+                </button>
+                <button className="btn btn-outline w-full">
+                  <ClipboardDocumentListIcon className="h-5 w-5" />
+                  Generar Reporte de Auditoría
+                </button>
+                <button className="btn btn-outline w-full">
+                  <ShieldCheckIcon className="h-5 w-5" />
+                  Verificar Cumplimiento
+                </button>
+                <button className="btn btn-outline w-full">
+                  <MagnifyingGlassIcon className="h-5 w-5" />
+                  Buscar Paciente
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Buscar Paciente</h3>
+              <div className="space-y-4">
                 <input
                   type="text"
                   placeholder="Ingresar dirección de wallet del paciente"
                   value={searchAddress}
                   onChange={(e) => setSearchAddress(e.target.value)}
-                  className="flex-1 bg-slate-700 text-white p-3 rounded-lg border border-slate-600 focus:border-blue-500 focus:outline-none"
+                  className="input input-bordered w-full"
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors">
+                <button className="btn btn-primary w-full">
                   Nueva Evaluación
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Risk Assessments Section */}
-          <div>
-            <h2 className="text-2xl font-bold mb-6">Evaluaciones de Riesgo</h2>
+          {/* Recent Assessments */}
+          <div className="bg-base-100 p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-6">Evaluaciones de Riesgo Recientes</h3>
             
-            <div className="bg-slate-800 rounded-lg overflow-hidden">
-              <div className="grid grid-cols-4 gap-px bg-slate-600">
-                <div className="bg-slate-700 p-4 font-semibold">
-                  Dirección del Paciente
-                </div>
-                <div className="bg-slate-700 p-4 font-semibold">
-                  Puntuación de Riesgo
-                </div>
-                <div className="bg-slate-700 p-4 font-semibold">
-                  Estado
-                </div>
-                <div className="bg-slate-700 p-4 font-semibold">
-                  Fecha
-                </div>
-              </div>
-              
-              {assessments.map((assessment, index) => (
-                <div key={index} className="grid grid-cols-4 gap-px bg-slate-600">
-                  <div className="bg-slate-800 p-4">
-                    {assessment.patientAddress}
-                  </div>
-                  <div className="bg-slate-800 p-4">
-                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                      assessment.riskScore === 'Bajo' ? 'bg-green-600 text-white' :
-                      assessment.riskScore === 'Medio' ? 'bg-yellow-600 text-white' :
-                      'bg-red-600 text-white'
-                    }`}>
-                      {assessment.riskScore}
-                    </span>
-                  </div>
-                  <div className="bg-slate-800 p-4">
-                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                      assessment.status === 'Completado' ? 'bg-green-600 text-white' :
-                      assessment.status === 'En Proceso' ? 'bg-blue-600 text-white' :
-                      'bg-gray-600 text-white'
-                    }`}>
-                      {assessment.status}
-                    </span>
-                  </div>
-                  <div className="bg-slate-800 p-4">
-                    {assessment.date}
-                  </div>
-                </div>
-              ))}
+            <div className="overflow-x-auto">
+              <table className="table w-full">
+                <thead>
+                  <tr>
+                    <th>Dirección del Paciente</th>
+                    <th>Puntuación de Riesgo</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {assessments.map((assessment, index) => (
+                    <tr key={index}>
+                      <td>
+                        <span className="font-mono text-sm">{assessment.patientAddress}</span>
+                      </td>
+                      <td>
+                        <div className={`badge ${
+                          assessment.riskScore === 'Bajo' ? 'badge-success' :
+                          assessment.riskScore === 'Medio' ? 'badge-warning' :
+                          'badge-error'
+                        }`}>
+                          {assessment.riskScore}
+                        </div>
+                      </td>
+                      <td>
+                        <div className={`badge ${
+                          assessment.status === 'Completado' ? 'badge-success' :
+                          assessment.status === 'En Proceso' ? 'badge-info' :
+                          'badge-ghost'
+                        }`}>
+                          {assessment.status}
+                        </div>
+                      </td>
+                      <td>{assessment.date}</td>
+                      <td>
+                        <button className="btn btn-ghost btn-sm">Ver Detalles</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
 
-          {/* Statistics Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div className="bg-slate-800 p-6 rounded-lg">
-              <div className="flex items-center justify-between">
+          {/* Compliance Alerts */}
+          <div className="mt-8 bg-base-100 p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-4">Alertas de Cumplimiento</h3>
+            <div className="space-y-4">
+              <div className="alert alert-warning">
+                <ExclamationTriangleIcon className="h-6 w-6" />
                 <div>
-                  <p className="text-gray-400 text-sm">Evaluaciones Totales</p>
-                  <p className="text-2xl font-bold">156</p>
+                  <h4 className="font-semibold">Evaluación Pendiente</h4>
+                  <p className="text-sm">3 evaluaciones de riesgo requieren revisión manual</p>
                 </div>
-                <ChartBarIcon className="h-8 w-8 text-blue-400" />
               </div>
-            </div>
-            
-            <div className="bg-slate-800 p-6 rounded-lg">
-              <div className="flex items-center justify-between">
+              <div className="alert alert-info">
+                <CheckCircleIcon className="h-6 w-6" />
                 <div>
-                  <p className="text-gray-400 text-sm">Riesgo Promedio</p>
-                  <p className="text-2xl font-bold text-yellow-400">Medio</p>
+                  <h4 className="font-semibold">Cumplimiento Actualizado</h4>
+                  <p className="text-sm">Todas las auditorías del mes han sido completadas exitosamente</p>
                 </div>
-                <ShieldCheckIcon className="h-8 w-8 text-yellow-400" />
-              </div>
-            </div>
-            
-            <div className="bg-slate-800 p-6 rounded-lg">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">Cumplimiento</p>
-                  <p className="text-2xl font-bold text-green-400">98.5%</p>
-                </div>
-                <DocumentTextIcon className="h-8 w-8 text-green-400" />
               </div>
             </div>
           </div>
