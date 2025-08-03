@@ -145,13 +145,13 @@ const DocumentManager: React.FC = () => {
 
   const getDocumentTypeColor = (type: DocumentType) => {
     const colors = {
-      [DocumentType.MEDICAL_HISTORY]: 'bg-blue-100 text-blue-800',
-      [DocumentType.LAB_RESULTS]: 'bg-green-100 text-green-800',
-      [DocumentType.IMAGING]: 'bg-purple-100 text-purple-800',
-      [DocumentType.PRESCRIPTION]: 'bg-orange-100 text-orange-800',
-      [DocumentType.INSURANCE_CLAIM]: 'bg-red-100 text-red-800'
+      [DocumentType.MEDICAL_HISTORY]: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
+      [DocumentType.LAB_RESULTS]: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
+      [DocumentType.IMAGING]: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
+      [DocumentType.PRESCRIPTION]: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300',
+      [DocumentType.INSURANCE_CLAIM]: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
     };
-    return colors[type] || 'bg-gray-100 text-gray-800';
+    return colors[type] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
   };
 
   return (
@@ -159,7 +159,7 @@ const DocumentManager: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div className="flex items-center space-x-3">
-          <FileText className="h-8 w-8 text-blue-600" />
+          <FileText className="h-8 w-8 text-blue-600 dark:text-blue-400" />
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Gestión de Documentos</h2>
             <p className="text-gray-600 dark:text-gray-400">Administra las historias clínicas y documentos médicos</p>
@@ -168,7 +168,7 @@ const DocumentManager: React.FC = () => {
         
         <button
           onClick={() => setShowAddForm(true)}
-          className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center space-x-2 px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
         >
           <Plus className="h-5 w-5" />
           <span>Nuevo Documento</span>
@@ -221,7 +221,7 @@ const DocumentManager: React.FC = () => {
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{doc.title}</h3>
-                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${getDocumentTypeColor(doc.documentType)} dark:bg-opacity-20`}>
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${getDocumentTypeColor(doc.documentType)}`}>
                         {DOCUMENT_TYPE_LABELS[doc.documentType]}
                       </span>
                     </div>
