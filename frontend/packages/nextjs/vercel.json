@@ -1,24 +1,13 @@
 {
   "framework": "nextjs",
-  "buildCommand": "yarn build",
-  "outputDirectory": ".next",
-  "installCommand": "yarn install",
   "env": {
     "VERCEL_TELEMETRY_DISABLED": "1",
-    "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true",
-    "NODE_ENV": "production"
+    "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true"
   },
   "build": {
     "env": {
       "VERCEL_TELEMETRY_DISABLED": "1",
-      "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true",
-      "NODE_ENV": "production"
+      "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true"
     }
-  },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    }
-  ]
+  }
 }
