@@ -103,7 +103,7 @@ const App: React.FC = () => {
                   
                   <div className="flex items-center gap-x-4 lg:gap-x-6">
                     <ThemeToggle />
-                    <WalletConnect />
+                    <WalletConnect compact />
                   </div>
                 </div>
               </div>

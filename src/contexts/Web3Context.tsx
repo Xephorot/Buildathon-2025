@@ -61,6 +61,28 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Guardar estado de conexión en localStorage
+  const saveConnectionState = (address: string, entityType: number, entityTypeString: string) => {
+    const connectionData = {
+      address,
+      entityType,
+      entityTypeString,
+      timestamp: Date.now()
+    };
+    localStorage.setItem('wallet_connection', JSON.stringify(connectionData));
+  };
+
+  // Limpiar estado de conexión del localStorage
+  const clearConnectionState = () => {
+    localStorage.removeItem('wallet_connection');
+  };
+
+  // Verificar si la conexión es reciente (menos de 24 horas)
+  const isRecentConnection = (timestamp: number) => {
+    const ONE_DAY = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+    return Date.now() - timestamp < ONE_DAY;
+  };
+
   const initializeContracts = async (signerInstance: ethers.JsonRpcSigner) => {
     try {
       const accessControl = new ethers.Contract(
@@ -133,11 +155,16 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
       const entityTypeString = Object.keys(EntityType)[entityType] || 'PATIENT';
       setUserType(entityTypeString);
 
-      setUser({
+      const userData = {
         address,
         entityType,
         isConnected: true,
-      });
+      };
+
+      setUser(userData);
+
+      // Guardar estado en localStorage para persistencia
+      saveConnectionState(address, entityType, entityTypeString);
 
     } catch (error: any) {
       console.error('Error conectando wallet:', error);
@@ -158,6 +185,9 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
       auditTrail: null,
     });
     setError(null);
+    
+    // Limpiar estado de conexión del localStorage
+    clearConnectionState();
   };
 
   // Escuchar cambios de cuenta y red
@@ -165,8 +195,18 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
     if (window.ethereum) {
       const handleAccountsChanged = (accounts: string[]) => {
         if (accounts.length === 0) {
+          // Si no hay cuentas, desconectar y limpiar localStorage
           disconnectWallet();
         } else {
+          // Verificar si la nueva cuenta coincide con la guardada
+          const savedConnection = localStorage.getItem('wallet_connection');
+          if (savedConnection) {
+            const connectionData = JSON.parse(savedConnection);
+            if (accounts[0].toLowerCase() !== connectionData.address.toLowerCase()) {
+              // Si la cuenta cambió, limpiar estado y reconectar
+              clearConnectionState();
+            }
+          }
           // Reconectar con nueva cuenta
           connectWallet();
         }
@@ -192,12 +232,40 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
     const autoConnect = async () => {
       if (window.ethereum) {
         try {
+          // Verificar si hay una conexión guardada reciente
+          const savedConnection = localStorage.getItem('wallet_connection');
+          if (savedConnection) {
+            const connectionData = JSON.parse(savedConnection);
+            
+            // Verificar si la conexión es reciente (menos de 24 horas)
+            if (!isRecentConnection(connectionData.timestamp)) {
+              clearConnectionState();
+              return;
+            }
+          }
+
+          // Verificar si MetaMask tiene cuentas conectadas
           const accounts = await window.ethereum.request({ method: 'eth_accounts' });
           if (accounts.length > 0) {
-            await connectWallet();
+            // Si hay conexión guardada y cuentas conectadas, reconectar
+            if (savedConnection) {
+              const connectionData = JSON.parse(savedConnection);
+              // Verificar que la cuenta actual coincida con la guardada
+              if (accounts[0].toLowerCase() === connectionData.address.toLowerCase()) {
+                await connectWallet();
+              } else {
+                // Si la cuenta cambió, limpiar el estado guardado
+                clearConnectionState();
+              }
+            } else {
+              // Si no hay estado guardado pero hay cuentas conectadas, intentar conectar
+              await connectWallet();
+            }
           }
         } catch (error) {
           console.error('Error en auto-conexión:', error);
+          // Si hay error, limpiar estado guardado
+          clearConnectionState();
         }
       }
     };

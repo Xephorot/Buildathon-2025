@@ -1,6 +1,7 @@
 import React from 'react';
 import { Activity, FileText, Shield, User, Calendar, TrendingUp } from 'lucide-react';
 import { useWeb3 } from '../contexts/Web3Context';
+import WalletConnect from './WalletConnect';
 
 const Dashboard: React.FC = () => {
   const { user, userType } = useWeb3();
@@ -61,29 +62,36 @@ const Dashboard: React.FC = () => {
 
   if (!user) {
     return (
-      <div className="text-center py-12">
-        <div className="max-w-md mx-auto">
-          <div className="mb-6">
-            <div className="w-24 h-24 mx-auto bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-4">
-              <User className="h-12 w-12 text-gray-400 dark:text-gray-500" />
+      <div className="space-y-6">
+        <div className="text-center py-8">
+          <div className="max-w-md mx-auto">
+            <div className="mb-6">
+              <div className="w-24 h-24 mx-auto bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-4">
+                <User className="h-12 w-12 text-gray-400 dark:text-gray-500" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                Bienvenido a Histo Bit
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                Sistema de Historias Clínicas Blockchain - Para comenzar, conecta tu wallet de MetaMask
+              </p>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              Bienvenido a Histo Bit
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Sistema de Historias Clínicas Blockchain - Para comenzar, conecta tu wallet de MetaMask
-            </p>
+            
+            <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-6 mb-6">
+              <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">¿Qué puedes hacer?</h3>
+              <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+                <li>• Controlar el acceso a tus historias clínicas</li>
+                <li>• Otorgar permisos temporales a médicos y seguros</li>
+                <li>• Gestionar documentos médicos de forma segura</li>
+                <li>• Auditar todos los accesos a tu información</li>
+              </ul>
+            </div>
           </div>
-          
-          <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-6">
-            <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">¿Qué puedes hacer?</h3>
-            <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
-              <li>• Controlar el acceso a tus historias clínicas</li>
-              <li>• Otorgar permisos temporales a médicos y seguros</li>
-              <li>• Gestionar documentos médicos de forma segura</li>
-              <li>• Auditar todos los accesos a tu información</li>
-            </ul>
-          </div>
+        </div>
+        
+        {/* Componente de conexión de wallet */}
+        <div className="max-w-md mx-auto">
+          <WalletConnect />
         </div>
       </div>
     );

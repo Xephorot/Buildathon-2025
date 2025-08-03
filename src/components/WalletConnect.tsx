@@ -1,10 +1,52 @@
 import React from 'react';
-import { Wallet, AlertCircle, CheckCircle } from 'lucide-react';
+import { Wallet, AlertCircle, CheckCircle, LogOut } from 'lucide-react';
 import { useWeb3 } from '../contexts/Web3Context';
 
-const WalletConnect: React.FC = () => {
+interface WalletConnectProps {
+  compact?: boolean;
+}
+
+const WalletConnect: React.FC<WalletConnectProps> = ({ compact = false }) => {
   const { user, connectWallet, disconnectWallet, isLoading, error } = useWeb3();
 
+  // Versión compacta para el header
+  if (compact) {
+    if (user?.isConnected) {
+      return (
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 bg-green-50 dark:bg-green-900/30 px-3 py-2 rounded-lg">
+            <CheckCircle className="h-4 w-4 text-green-500 dark:text-green-400" />
+            <div className="text-sm">
+              <span className="font-medium text-green-700 dark:text-green-300">Wallet Conectada</span>
+              <div className="text-xs text-green-600 dark:text-green-400">
+                {user.address.slice(0, 6)}...{user.address.slice(-4)}
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={disconnectWallet}
+            className="p-2 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
+            title="Desconectar"
+          >
+            <LogOut className="h-4 w-4" />
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <button
+        onClick={connectWallet}
+        disabled={isLoading}
+        className="flex items-center space-x-2 px-3 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+      >
+        <Wallet className="h-4 w-4" />
+        <span>{isLoading ? 'Conectando...' : 'Conectar'}</span>
+      </button>
+    );
+  }
+
+  // Versión completa para el dashboard
   if (user?.isConnected) {
     return (
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
