@@ -4,7 +4,6 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { DocumentIcon, CloudArrowUpIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import PatientSidebar from "~~/components/PatientSidebar";
 
 const PatientUpload: NextPage = () => {

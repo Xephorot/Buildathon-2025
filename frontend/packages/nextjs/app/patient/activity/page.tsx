@@ -3,8 +3,7 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { EyeIcon, ClockIcon, UserIcon, DocumentIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { EyeIcon, ClockIcon, DocumentIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
 import PatientSidebar from "~~/components/PatientSidebar";
 
 interface ActivityLog {

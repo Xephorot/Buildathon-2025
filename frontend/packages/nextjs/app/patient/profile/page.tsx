@@ -5,9 +5,6 @@ import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { 
   UserIcon, 
-  EnvelopeIcon, 
-  PhoneIcon, 
-  MapPinIcon,
   CalendarIcon,
   IdentificationIcon,
   ShieldCheckIcon,

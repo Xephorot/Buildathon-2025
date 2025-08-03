@@ -144,7 +144,7 @@ const PatientRecords: NextPage = () => {
         <div className="alert alert-error mb-6">
           <div>
             <h3 className="font-bold">Access Expired</h3>
-            <div className="text-xs">Your access to this patient's records has expired. Please request renewed access.</div>
+            <div className="text-xs">Your access to this patient&apos;s records has expired. Please request renewed access.</div>
           </div>
         </div>
       )}
@@ -241,7 +241,7 @@ const PatientRecords: NextPage = () => {
           <div className="text-center py-12">
             <DocumentIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">No records available</h3>
-            <p className="text-gray-600">This patient hasn't shared any records with you yet.</p>
+            <p className="text-gray-600">This patient hasn&apos;t shared any records with you yet.</p>
           </div>
         )}
       </div>
