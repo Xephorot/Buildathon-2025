@@ -1,13 +1,16 @@
 import type { NextConfig } from "next";
 
+const isVercel = process.env.VERCEL === "1";
+const ignoreErrors = process.env.NEXT_PUBLIC_IGNORE_BUILD_ERROR === "true" || isVercel;
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   typescript: {
-    ignoreBuildErrors: process.env.NEXT_PUBLIC_IGNORE_BUILD_ERROR === "true",
+    ignoreBuildErrors: ignoreErrors,
   },
   eslint: {
-    ignoreDuringBuilds: process.env.NEXT_PUBLIC_IGNORE_BUILD_ERROR === "true",
+    ignoreDuringBuilds: ignoreErrors,
   },
   webpack: config => {
     config.resolve.fallback = { fs: false, net: false, tls: false };

@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "build:production": "NEXT_PUBLIC_IGNORE_BUILD_ERROR=true next build",
     "check-types": "tsc --noEmit --incremental",
     "dev": "next dev",
     "format": "prettier --write . '!(node_modules|.next|contracts)/**/*'",
@@ -13,9 +12,8 @@
     "lint:fix": "next lint --fix",
     "serve": "next start",
     "start": "next dev",
-    "vercel": "vercel --build-env YARN_ENABLE_IMMUTABLE_INSTALLS=false --build-env ENABLE_EXPERIMENTAL_COREPACK=1 --build-env VERCEL_TELEMETRY_DISABLED=1",
-    "vercel:login": "vercel login",
-    "vercel:yolo": "vercel --build-env YARN_ENABLE_IMMUTABLE_INSTALLS=false --build-env ENABLE_EXPERIMENTAL_COREPACK=1 --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true --build-env VERCEL_TELEMETRY_DISABLED=1"
+    "vercel": "vercel",
+    "vercel:login": "vercel login"
   },
   "dependencies": {
     "@heroicons/react": "~2.1.5",

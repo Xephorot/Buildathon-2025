@@ -1,20 +1,18 @@
 {
-  "installCommand": "yarn install",
-  "buildCommand": "yarn build:production",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
   "framework": "nextjs",
   "outputDirectory": ".next",
   "env": {
-    "YARN_ENABLE_IMMUTABLE_INSTALLS": "false",
-    "ENABLE_EXPERIMENTAL_COREPACK": "1",
     "VERCEL_TELEMETRY_DISABLED": "1",
-    "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true"
+    "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true",
+    "NODE_ENV": "production"
   },
   "build": {
     "env": {
-      "YARN_ENABLE_IMMUTABLE_INSTALLS": "false",
-      "ENABLE_EXPERIMENTAL_COREPACK": "1",
       "VERCEL_TELEMETRY_DISABLED": "1",
-      "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true"
+      "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true",
+      "NODE_ENV": "production"
     }
   },
   "rewrites": [
