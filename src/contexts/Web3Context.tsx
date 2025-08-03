@@ -60,6 +60,7 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isManualDisconnect, setIsManualDisconnect] = useState(false);
 
   // Guardar estado de conexión en localStorage
   const saveConnectionState = (address: string, entityType: number, entityTypeString: string) => {
@@ -75,6 +76,18 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
   // Limpiar estado de conexión del localStorage
   const clearConnectionState = () => {
     localStorage.removeItem('wallet_connection');
+    // También agregar un flag para indicar que fue desconexión manual
+    localStorage.setItem('manual_disconnect', 'true');
+  };
+
+  // Verificar si fue una desconexión manual reciente
+  const wasManuallyDisconnected = () => {
+    return localStorage.getItem('manual_disconnect') === 'true';
+  };
+
+  // Limpiar flag de desconexión manual
+  const clearManualDisconnectFlag = () => {
+    localStorage.removeItem('manual_disconnect');
   };
 
   // Verificar si la conexión es reciente (menos de 24 horas)
@@ -165,6 +178,9 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
 
       // Guardar estado en localStorage para persistencia
       saveConnectionState(address, entityType, entityTypeString);
+      
+      // Limpiar flag de desconexión manual ya que el usuario se conectó voluntariamente
+      clearManualDisconnectFlag();
 
     } catch (error: any) {
       console.error('Error conectando wallet:', error);
@@ -174,7 +190,9 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const disconnectWallet = () => {
+  const disconnectWallet = useCallback(() => {
+    console.log('Desconectando wallet manualmente...');
+    setIsManualDisconnect(true);
     setUser(null);
     setUserType(null);
     setProvider(null);
@@ -188,12 +206,21 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
     
     // Limpiar estado de conexión del localStorage
     clearConnectionState();
-  };
+    
+    // Reset del flag de estado después de un breve delay
+    setTimeout(() => setIsManualDisconnect(false), 1000);
+  }, []);
 
   // Escuchar cambios de cuenta y red
   useEffect(() => {
     if (window.ethereum) {
       const handleAccountsChanged = (accounts: string[]) => {
+        // No procesar cambios si fue una desconexión manual reciente
+        if (isManualDisconnect || wasManuallyDisconnected()) {
+          console.log('Ignorando cambio de cuenta por desconexión manual');
+          return;
+        }
+        
         if (accounts.length === 0) {
           // Si no hay cuentas, desconectar y limpiar localStorage
           disconnectWallet();
@@ -225,12 +252,18 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
         window.ethereum.removeListener('chainChanged', handleChainChanged);
       };
     }
-  }, [connectWallet]);
+  }, [connectWallet, disconnectWallet, isManualDisconnect]);
 
   // Auto-conectar si ya estaba conectado
   useEffect(() => {
     const autoConnect = async () => {
-      if (window.ethereum) {
+      // No intentar auto-conectar si fue una desconexión manual
+      if (wasManuallyDisconnected()) {
+        console.log('No auto-conectando debido a desconexión manual previa');
+        return;
+      }
+      
+      if (window.ethereum && !user && !isManualDisconnect) {
         try {
           // Verificar si hay una conexión guardada reciente
           const savedConnection = localStorage.getItem('wallet_connection');
@@ -252,6 +285,7 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
               const connectionData = JSON.parse(savedConnection);
               // Verificar que la cuenta actual coincida con la guardada
               if (accounts[0].toLowerCase() === connectionData.address.toLowerCase()) {
+                console.log('Auto-reconectando con cuenta guardada');
                 await connectWallet();
               } else {
                 // Si la cuenta cambió, limpiar el estado guardado
@@ -259,6 +293,7 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
               }
             } else {
               // Si no hay estado guardado pero hay cuentas conectadas, intentar conectar
+              console.log('Auto-conectando con cuenta disponible');
               await connectWallet();
             }
           }
@@ -270,8 +305,9 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
       }
     };
 
+    // Solo ejecutar una vez al montar el componente
     autoConnect();
-  }, [connectWallet]);
+  }, [connectWallet, user, isManualDisconnect]);
 
   const value: Web3ContextType = {
     user,

@@ -9,6 +9,12 @@ interface WalletConnectProps {
 const WalletConnect: React.FC<WalletConnectProps> = ({ compact = false }) => {
   const { user, connectWallet, disconnectWallet, isLoading, error } = useWeb3();
 
+  const handleConnect = () => {
+    // Limpiar flag de desconexión manual antes de conectar
+    localStorage.removeItem('manual_disconnect');
+    connectWallet();
+  };
+
   // Versión compacta para el header
   if (compact) {
     if (user?.isConnected) {
@@ -36,7 +42,7 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ compact = false }) => {
 
     return (
       <button
-        onClick={connectWallet}
+        onClick={handleConnect}
         disabled={isLoading}
         className="flex items-center space-x-2 px-3 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
       >
@@ -88,7 +94,7 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ compact = false }) => {
         )}
 
         <button
-          onClick={connectWallet}
+          onClick={handleConnect}
           disabled={isLoading}
           className="w-full px-6 py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
