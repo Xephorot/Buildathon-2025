@@ -7,7 +7,7 @@ const WalletConnect: React.FC = () => {
 
   if (user?.isConnected) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <CheckCircle className="h-8 w-8 text-green-500" />
@@ -20,7 +20,7 @@ const WalletConnect: React.FC = () => {
           </div>
           <button
             onClick={disconnectWallet}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+            className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
           >
             Desconectar
           </button>
@@ -30,7 +30,7 @@ const WalletConnect: React.FC = () => {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
       <div className="text-center">
         <Wallet className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-4" />
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Conectar Wallet</h3>

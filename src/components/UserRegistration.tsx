@@ -63,18 +63,18 @@ const UserRegistration: React.FC = () => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
       <div className="flex items-center space-x-3 mb-6">
-        <UserPlus className="h-8 w-8 text-blue-600" />
+        <UserPlus className="h-8 w-8 text-blue-600 dark:text-blue-400" />
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Registro de Usuario</h2>
-          <p className="text-gray-600">Selecciona tu tipo de usuario en el sistema</p>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Registro de Usuario</h2>
+          <p className="text-gray-600 dark:text-gray-400">Selecciona tu tipo de usuario en el sistema</p>
         </div>
       </div>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
             Tipo de Usuario
           </label>
           <div className="grid grid-cols-2 gap-4">
@@ -86,8 +86,8 @@ const UserRegistration: React.FC = () => {
                   onClick={() => setSelectedType(entityType)}
                   className={`p-4 border-2 rounded-lg transition-all ${
                     selectedType === entityType
-                      ? 'border-blue-500 bg-blue-50 text-blue-700'
-                      : 'border-gray-200 hover:border-gray-300'
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
+                      : 'border-gray-200 dark:border-slate-600 hover:border-gray-300 dark:hover:border-slate-500 text-gray-900 dark:text-white'
                   }`}
                 >
                   <div className="flex flex-col items-center space-y-2">

@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
       <div className="text-center py-12">
         <div className="max-w-md mx-auto">
           <div className="mb-6">
-            <div className="w-24 h-24 mx-auto bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-4">
+            <div className="w-24 h-24 mx-auto bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-4">
               <User className="h-12 w-12 text-gray-400 dark:text-gray-500" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -98,7 +98,7 @@ const Dashboard: React.FC = () => {
           <p className="text-gray-600 dark:text-gray-400">Resumen de tu actividad en el sistema</p>
         </div>
         
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
               <User className="h-6 w-6 text-blue-600 dark:text-blue-400" />
@@ -117,7 +117,7 @@ const Dashboard: React.FC = () => {
 
       {/* Estadísticas principales */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
               <FileText className="h-6 w-6 text-blue-600 dark:text-blue-400" />
@@ -133,7 +133,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
               <Shield className="h-6 w-6 text-green-600 dark:text-green-400" />
@@ -148,7 +148,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
               <Activity className="h-6 w-6 text-purple-600 dark:text-purple-400" />
@@ -163,7 +163,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
               <Calendar className="h-6 w-6 text-orange-600 dark:text-orange-400" />
@@ -184,15 +184,15 @@ const Dashboard: React.FC = () => {
       {/* Actividad reciente y accesos rápidos */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Actividad reciente */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md">
+          <div className="p-6 border-b border-gray-200 dark:border-slate-700">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Actividad Reciente</h3>
           </div>
           <div className="p-6">
             <div className="space-y-4">
               {recentActivities.map((activity) => (
                 <div key={activity.id} className="flex items-start space-x-3">
-                  <div className="p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <div className="p-2 bg-gray-50 dark:bg-slate-700 rounded-lg">
                     {getActivityIcon(activity.type)}
                   </div>
                   <div className="flex-1">
@@ -211,28 +211,28 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Accesos rápidos */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md">
+          <div className="p-6 border-b border-gray-200 dark:border-slate-700">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Accesos Rápidos</h3>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-2 gap-4">
-              <button className="p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors">
+              <button className="p-4 border-2 border-gray-200 dark:border-slate-600 rounded-lg hover:border-blue-300 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors">
                 <FileText className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
                 <p className="text-sm font-medium text-gray-900 dark:text-white">Nuevo Documento</p>
               </button>
               
-              <button className="p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-green-300 dark:hover:border-green-600 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors">
+              <button className="p-4 border-2 border-gray-200 dark:border-slate-600 rounded-lg hover:border-green-300 dark:hover:border-green-600 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors">
                 <Shield className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
                 <p className="text-sm font-medium text-gray-900 dark:text-white">Gestionar Permisos</p>
               </button>
               
-              <button className="p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-purple-300 dark:hover:border-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-colors">
+              <button className="p-4 border-2 border-gray-200 dark:border-slate-600 rounded-lg hover:border-purple-300 dark:hover:border-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-colors">
                 <Activity className="h-8 w-8 text-purple-600 dark:text-purple-400 mx-auto mb-2" />
                 <p className="text-sm font-medium text-gray-900 dark:text-white">Ver Auditoría</p>
               </button>
               
-              <button className="p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-orange-300 dark:hover:border-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/30 transition-colors">
+              <button className="p-4 border-2 border-gray-200 dark:border-slate-600 rounded-lg hover:border-orange-300 dark:hover:border-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/30 transition-colors">
                 <User className="h-8 w-8 text-orange-600 dark:text-orange-400 mx-auto mb-2" />
                 <p className="text-sm font-medium text-gray-900 dark:text-white">Mi Perfil</p>
               </button>
@@ -242,7 +242,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Estado de la red */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Estado de la Red</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="flex items-center space-x-3">

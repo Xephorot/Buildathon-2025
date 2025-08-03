@@ -190,57 +190,57 @@ const PermissionManager: React.FC = () => {
       </div>
 
       {/* Búsqueda */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-gray-500" />
           <input
             type="text"
             placeholder="Buscar por dirección, tipo de entidad o tipo de permiso..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
       </div>
 
       {/* Estadísticas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-green-100 rounded-lg">
-              <Check className="h-6 w-6 text-green-600" />
+            <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+              <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Permisos Activos</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Permisos Activos</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {permissions.filter(p => p.isActive && !isExpired(p.expirationTime)).length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-yellow-100 rounded-lg">
-              <Clock className="h-6 w-6 text-yellow-600" />
+            <div className="p-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
+              <Clock className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Expiran Pronto</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Expiran Pronto</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {permissions.filter(p => isExpiringSoon(p.expirationTime)).length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-red-100 rounded-lg">
-              <X className="h-6 w-6 text-red-600" />
+            <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-lg">
+              <X className="h-6 w-6 text-red-600 dark:text-red-400" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Expirados</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Expirados</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
                 {permissions.filter(p => isExpired(p.expirationTime)).length}
               </p>
             </div>
@@ -249,30 +249,30 @@ const PermissionManager: React.FC = () => {
       </div>
 
       {/* Lista de permisos */}
-      <div className="bg-white rounded-lg shadow-md">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md">
         {loading ? (
           <div className="p-12 text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Cargando permisos...</p>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando permisos...</p>
           </div>
         ) : filteredPermissions.length > 0 ? (
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-gray-200 dark:divide-slate-700">
             {filteredPermissions.map((permission, index) => (
-              <div key={index} className="p-6 hover:bg-gray-50 transition-colors">
+              <div key={index} className="p-6 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     {getEntityIcon(permission.entityType)}
                     
                     <div>
                       <div className="flex items-center space-x-2 mb-1">
-                        <p className="font-medium text-gray-900">{permission.entity}</p>
-                        <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded">
+                        <p className="font-medium text-gray-900 dark:text-white">{permission.entity}</p>
+                        <span className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 rounded">
                           {ENTITY_TYPE_LABELS[permission.entityType]}
                         </span>
                       </div>
                       
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
-                        <span className={`px-2 py-1 text-xs font-medium rounded ${getPermissionColor(permission.permissionType)}`}>
+                      <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                        <span className={`px-2 py-1 text-xs font-medium rounded ${getPermissionColor(permission.permissionType)} dark:bg-opacity-20`}>
                           {PERMISSION_TYPE_LABELS[permission.permissionType]}
                         </span>
                         <span>Otorgado: {formatDate(permission.timestamp)}</span>
@@ -283,15 +283,15 @@ const PermissionManager: React.FC = () => {
 
                   <div className="flex items-center space-x-2">
                     {isExpired(permission.expirationTime) ? (
-                      <span className="px-3 py-1 bg-red-100 text-red-700 text-sm rounded-full">
+                      <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-sm rounded-full">
                         Expirado
                       </span>
                     ) : isExpiringSoon(permission.expirationTime) ? (
-                      <span className="px-3 py-1 bg-yellow-100 text-yellow-700 text-sm rounded-full">
+                      <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 text-sm rounded-full">
                         Expira pronto
                       </span>
                     ) : (
-                      <span className="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full">
+                      <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-sm rounded-full">
                         Activo
                       </span>
                     )}
@@ -299,7 +299,7 @@ const PermissionManager: React.FC = () => {
                     {permission.isActive && !isExpired(permission.expirationTime) && (
                       <button
                         onClick={() => handleRevokePermission(permission.entity)}
-                        className="px-3 py-1 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        className="px-3 py-1 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                       >
                         Revocar
                       </button>
@@ -311,8 +311,8 @@ const PermissionManager: React.FC = () => {
           </div>
         ) : (
           <div className="p-12 text-center">
-            <Shield className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500">No se encontraron permisos</p>
+            <Shield className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+            <p className="text-gray-500 dark:text-gray-400">No se encontraron permisos</p>
           </div>
         )}
       </div>
@@ -320,7 +320,7 @@ const PermissionManager: React.FC = () => {
       {/* Modal para otorgar permiso */}
       {showGrantForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-md w-full">
+          <div className="bg-white dark:bg-slate-800 rounded-lg max-w-md w-full">
             <div className="p-6 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900">Otorgar Nuevo Permiso</h3>
             </div>

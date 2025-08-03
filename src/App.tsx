@@ -24,11 +24,11 @@ const App: React.FC = () => {
     <ThemeProvider>
       <Web3Provider>
         <Router>
-          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+          <div className="min-h-screen bg-gray-50 dark:bg-slate-900 transition-colors">
             {/* Sidebar para móvil */}
             <div className={`fixed inset-0 z-50 lg:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
               <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setSidebarOpen(false)} />
-              <div className="relative flex w-full max-w-xs flex-col bg-white dark:bg-gray-800 pb-4 shadow-xl">
+              <div className="relative flex w-full max-w-xs flex-col bg-white dark:bg-slate-800 pb-4 shadow-xl">
                 <div className="absolute top-0 right-0 -mr-12 pt-2">
                   <button
                     type="button"
@@ -60,8 +60,8 @@ const App: React.FC = () => {
 
             {/* Sidebar para desktop */}
             <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-              <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                <div className="flex h-16 shrink-0 items-center px-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+                <div className="flex h-16 shrink-0 items-center px-4 border-b border-gray-200 dark:border-slate-700">
                   <h1 className="text-xl font-bold text-blue-600 dark:text-blue-400">Histo Bit</h1>
                 </div>
                 
@@ -85,7 +85,7 @@ const App: React.FC = () => {
             {/* Contenido principal */}
             <div className="lg:pl-64 flex flex-col min-h-screen">
               {/* Header */}
-              <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+              <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
                 <button
                   type="button"
                   className="-m-2.5 p-2.5 text-gray-700 dark:text-gray-300 lg:hidden"
@@ -122,7 +122,7 @@ const App: React.FC = () => {
               </main>
 
               {/* Footer */}
-              <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+              <footer className="bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-slate-700">
                 <div className="px-4 py-6 sm:px-6 lg:px-8">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">

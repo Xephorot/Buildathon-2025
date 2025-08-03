@@ -7,12 +7,14 @@ El sistema de temas permite a los usuarios alternar entre modo claro y oscuro en
 ## Características
 
 ### 🌞 Tema Claro
+
 - Fondo blanco/gris claro
 - Texto negro/gris oscuro
 - Elementos de interfaz con colores claros
 - Ideal para uso diurno
 
 ### 🌙 Tema Oscuro
+
 - Fondo gris oscuro/negro
 - Texto blanco/gris claro
 - Elementos de interfaz con colores oscuros
@@ -21,17 +23,20 @@ El sistema de temas permite a los usuarios alternar entre modo claro y oscuro en
 ## Implementación
 
 ### Contexto de Tema
+
 - **Archivo**: `src/contexts/ThemeContext.tsx`
 - **Funcionalidad**: Maneja el estado global del tema
 - **Persistencia**: Guarda la preferencia en localStorage
 - **Detección automática**: Respeta la preferencia del sistema operativo
 
 ### Componente de Alternador
+
 - **Archivo**: `src/components/ThemeToggle.tsx`
 - **Ubicación**: En el header de la aplicación
 - **Iconos**: Sol para tema claro, Luna para tema oscuro
 
 ### Configuración de Tailwind
+
 - **Archivo**: `tailwind.config.js`
 - **Modo oscuro**: Configurado con `darkMode: 'class'`
 - **Clases**: Utiliza el prefijo `dark:` para estilos del tema oscuro
@@ -104,11 +109,13 @@ text-red-700 dark:text-red-300
 ## Próximos Pasos
 
 ### Componentes Pendientes
+
 - [ ] **UserRegistration.tsx** - Formulario de registro
 - [ ] Modales y popups adicionales
 - [ ] Componentes de notificaciones
 
 ### Mejoras Futuras
+
 - [ ] Más variantes de temas (ej: temas de alto contraste)
 - [ ] Personalización de colores por usuario
 - [ ] Tema automático basado en hora del día
@@ -120,7 +127,7 @@ text-red-700 dark:text-red-300
 
 ```tsx
 // Importar el hook
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from "../contexts/ThemeContext";
 
 // Usar en componente
 const { theme, toggleTheme, setTheme } = useTheme();
@@ -128,7 +135,7 @@ const { theme, toggleTheme, setTheme } = useTheme();
 // Aplicar clases condicionales
 <div className="bg-white dark:bg-gray-800">
   <h1 className="text-gray-900 dark:text-white">Título</h1>
-</div>
+</div>;
 ```
 
 ### Para Usuarios
