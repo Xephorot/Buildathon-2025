@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>MedChain - Test</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="loading-container flex justify-center items-center h-screen bg-gray-50">
+      <div>
+        <div class="w-10 h-10 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
+        <div class="mt-4 text-gray-600">Cargando MedChain...</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const SimpleApp = () => {
+      const [connected, setConnected] = useState(false);
+      const [account, setAccount] = useState('');
+
+      const connectWallet = async () => {
+        if (typeof window.ethereum !== 'undefined') {
+          try {
+            const accounts = await window.ethereum.request({
+              method: 'eth_requestAccounts'
+            });
+            setAccount(accounts[0]);
+            setConnected(true);
+          } catch (error) {
+            console.error('Error connecting wallet:', error);
+          }
+        } else {
+          alert('MetaMask no está instalado. Por favor, instálalo desde metamask.io');
+        }
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-50">
+          <div className="bg-white shadow-sm border-b">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center py-6">
+                <div className="flex items-center">
+                  <h1 className="text-2xl font-bold text-blue-600">MedChain</h1>
+                  <span className="ml-3 text-sm text-gray-500">Sistema de Historias Clínicas Blockchain</span>
+                </div>
+                <div>
+                  {connected ? (
+                    <div className="bg-green-100 text-green-800 px-4 py-2 rounded-lg">
+                      <span className="text-sm">Conectado: {account.substring(0, 6)}...{account.substring(38)}</span>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={connectWallet}
+                      className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                      Conectar Wallet
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Bienvenido al Sistema MedChain
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Control descentralizado de historias clínicas en Arbitrum Sepolia
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div className="bg-white rounded-lg shadow-md p-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Control de Acceso</h3>
+                  <p className="text-gray-600">Gestiona quién puede acceder a tus historias clínicas con permisos granulares.</p>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-md p-6">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Documentos Médicos</h3>
+                  <p className="text-gray-600">Almacena y gestiona tus documentos médicos de forma segura en IPFS.</p>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-md p-6">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Auditoría Completa</h3>
+                  <p className="text-gray-600">Rastrea todos los accesos y modificaciones a tus datos médicos.</p>
+                </div>
+              </div>
+
+              {connected && (
+                <div className="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold text-blue-900 mb-2">¡Wallet Conectado!</h3>
+                  <p className="text-blue-700 mb-4">
+                    Tu aplicación React completa está siendo preparada. Una vez que esté lista, podrás:
+                  </p>
+                  <ul className="text-sm text-blue-600 space-y-1">
+                    <li>• Registrarte como paciente, doctor, seguro o auditor</li>
+                    <li>• Gestionar documentos médicos con IPFS</li>
+                    <li>• Otorgar y revocar permisos de acceso</li>
+                    <li>• Ver auditorías completas de tu actividad</li>
+                  </ul>
+                </div>
+              )}
+
+              <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <p className="text-sm text-yellow-800">
+                  <strong>Nota:</strong> Este es un entorno de prueba. La aplicación React completa se está compilando...
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <footer className="bg-white border-t border-gray-200 mt-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600">Arbitrum Sepolia</span>
+                  </div>
+                  <span className="text-sm text-gray-500">v1.0.0</span>
+                </div>
+                <span className="text-sm text-gray-500">Desarrollado con ❤️ para la salud digital</span>
+              </div>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<SimpleApp />, document.getElementById('root'));
+  </script>
+</body>
+</html>

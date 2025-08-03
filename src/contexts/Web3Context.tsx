@@ -1,0 +1,225 @@
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import { ethers } from 'ethers';
+import { CONTRACT_ADDRESSES, CONTRACT_ABIS, EntityType } from '../config/contracts';
+import { switchToArbitrumSepolia, isCorrectNetwork } from '../config/network';
+import { User } from '../types';
+
+interface Web3ContextType {
+  user: User | null;
+  userType: string | null;
+  provider: ethers.BrowserProvider | null;
+  signer: ethers.JsonRpcSigner | null;
+  contracts: {
+    accessControl: ethers.Contract | null;
+    medicalRecords: ethers.Contract | null;
+    auditTrail: ethers.Contract | null;
+  };
+  connectWallet: () => Promise<void>;
+  disconnectWallet: () => void;
+  isLoading: boolean;
+  error: string | null;
+}
+
+const Web3Context = createContext<Web3ContextType>({
+  user: null,
+  userType: null,
+  provider: null,
+  signer: null,
+  contracts: {
+    accessControl: null,
+    medicalRecords: null,
+    auditTrail: null,
+  },
+  connectWallet: async () => {},
+  disconnectWallet: () => {},
+  isLoading: false,
+  error: null,
+});
+
+export const useWeb3 = () => {
+  const context = useContext(Web3Context);
+  if (!context) {
+    throw new Error('useWeb3 debe ser usado dentro de Web3Provider');
+  }
+  return context;
+};
+
+interface Web3ProviderProps {
+  children: ReactNode;
+}
+
+export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [userType, setUserType] = useState<string | null>(null);
+  const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
+  const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null);
+  const [contracts, setContracts] = useState({
+    accessControl: null as ethers.Contract | null,
+    medicalRecords: null as ethers.Contract | null,
+    auditTrail: null as ethers.Contract | null,
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const initializeContracts = async (signerInstance: ethers.JsonRpcSigner) => {
+    try {
+      const accessControl = new ethers.Contract(
+        CONTRACT_ADDRESSES.AccessControl,
+        CONTRACT_ABIS.AccessControl,
+        signerInstance
+      );
+
+      const medicalRecords = new ethers.Contract(
+        CONTRACT_ADDRESSES.MedicalRecords,
+        CONTRACT_ABIS.MedicalRecords,
+        signerInstance
+      );
+
+      const auditTrail = new ethers.Contract(
+        CONTRACT_ADDRESSES.AuditTrail,
+        CONTRACT_ABIS.AuditTrail,
+        signerInstance
+      );
+
+      setContracts({ accessControl, medicalRecords, auditTrail });
+      return { accessControl, medicalRecords, auditTrail };
+    } catch (error) {
+      console.error('Error inicializando contratos:', error);
+      throw error;
+    }
+  };
+
+  const connectWallet = useCallback(async () => {
+    if (!window.ethereum) {
+      setError('MetaMask no está instalado. Por favor instálalo para continuar.');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // Solicitar acceso a cuentas
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+      // Verificar/cambiar red
+      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+      const numericChainId = parseInt(chainId, 16);
+
+      if (!isCorrectNetwork(numericChainId)) {
+        await switchToArbitrumSepolia();
+      }
+
+      // Crear provider y signer
+      const ethProvider = new ethers.BrowserProvider(window.ethereum);
+      const ethSigner = await ethProvider.getSigner();
+      const address = await ethSigner.getAddress();
+
+      setProvider(ethProvider);
+      setSigner(ethSigner);
+
+      // Inicializar contratos
+      const contractInstances = await initializeContracts(ethSigner);
+
+      // Obtener tipo de entidad del usuario
+      let entityType = EntityType.PATIENT; // Por defecto
+      try {
+        entityType = await contractInstances.accessControl.getEntityType(address);
+      } catch (error) {
+        console.log('Usuario no registrado, será tratado como paciente');
+      }
+
+      // Convertir entityType a string para userType
+      const entityTypeString = Object.keys(EntityType)[entityType] || 'PATIENT';
+      setUserType(entityTypeString);
+
+      setUser({
+        address,
+        entityType,
+        isConnected: true,
+      });
+
+    } catch (error: any) {
+      console.error('Error conectando wallet:', error);
+      setError(error.message || 'Error conectando con MetaMask');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const disconnectWallet = () => {
+    setUser(null);
+    setUserType(null);
+    setProvider(null);
+    setSigner(null);
+    setContracts({
+      accessControl: null,
+      medicalRecords: null,
+      auditTrail: null,
+    });
+    setError(null);
+  };
+
+  // Escuchar cambios de cuenta y red
+  useEffect(() => {
+    if (window.ethereum) {
+      const handleAccountsChanged = (accounts: string[]) => {
+        if (accounts.length === 0) {
+          disconnectWallet();
+        } else {
+          // Reconectar con nueva cuenta
+          connectWallet();
+        }
+      };
+
+      const handleChainChanged = () => {
+        // Recargar página cuando cambie la red
+        window.location.reload();
+      };
+
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      window.ethereum.on('chainChanged', handleChainChanged);
+
+      return () => {
+        window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+        window.ethereum.removeListener('chainChanged', handleChainChanged);
+      };
+    }
+  }, [connectWallet]);
+
+  // Auto-conectar si ya estaba conectado
+  useEffect(() => {
+    const autoConnect = async () => {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+          if (accounts.length > 0) {
+            await connectWallet();
+          }
+        } catch (error) {
+          console.error('Error en auto-conexión:', error);
+        }
+      }
+    };
+
+    autoConnect();
+  }, [connectWallet]);
+
+  const value: Web3ContextType = {
+    user,
+    userType,
+    provider,
+    signer,
+    contracts,
+    connectWallet,
+    disconnectWallet,
+    isLoading,
+    error,
+  };
+
+  return (
+    <Web3Context.Provider value={value}>
+      {children}
+    </Web3Context.Provider>
+  );
+};

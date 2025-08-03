@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta
+    name="description"
+    content="Histo Bit - Sistema de Historias Clínicas Blockchain - Control descentralizado de datos médicos"
+  />
+  <title>Histo Bit - Sistema de Historias Clínicas Blockchain</title>
+  <style>
+    /* Estilos de carga mientras se inicializa la aplicación */
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f9fafb;
+    }
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e5e7eb;
+      border-top: 4px solid #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-text {
+      margin-top: 16px;
+      color: #6b7280;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <noscript>Necesitas habilitar JavaScript para ejecutar esta aplicación.</noscript>
+  <div id="root">
+    <!-- Pantalla de carga mientras se inicializa React -->
+    <div class="loading-container">
+      <div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Cargando MedChain...</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scripts de inicialización -->
+  <script>
+    // Verificar si MetaMask está instalado
+    window.addEventListener('load', function() {
+      if (typeof window.ethereum === 'undefined') {
+        console.warn('MetaMask no está instalado. La aplicación funcionará en modo limitado.');
+      }
+    });
+  </script>
+</body>
+</html>
