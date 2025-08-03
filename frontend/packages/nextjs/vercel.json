@@ -1,8 +1,8 @@
 {
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
   "framework": "nextjs",
+  "buildCommand": "cd ../.. && yarn workspace @se-2/nextjs build",
   "outputDirectory": ".next",
+  "installCommand": "cd ../.. && yarn install",
   "env": {
     "VERCEL_TELEMETRY_DISABLED": "1",
     "NEXT_PUBLIC_IGNORE_BUILD_ERROR": "true",

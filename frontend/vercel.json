@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "monorepo": true,
+  "builds": [
+    {
+      "src": "packages/nextjs/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "packages/nextjs/$1"
+    }
+  ]
+}
