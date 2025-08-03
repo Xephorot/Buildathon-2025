@@ -5,8 +5,8 @@ import "~~/styles/globals.css";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
-  title: "Scaffold-ETH 2 App",
-  description: "Built with 🏗 Scaffold-ETH 2",
+  title: "HISTOBIT - Historial Médico Descentralizado",
+  description: "Tu historial médico, seguro, accesible y bajo tu control",
 });
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {

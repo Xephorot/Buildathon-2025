@@ -25,6 +25,12 @@ inclusion: always
 │       ├── product.md
 │       ├── structure.md
 │       └── tech.md
+├── .tasks/             # Development task tracking
+│   ├── development-tasks.md
+│   ├── development-workflow.md
+│   ├── file-implementation-matrix.md
+│   ├── integration-checklist.md
+│   └── progress-tracker.md
 ├── .vscode/            # VS Code configuration
 │   └── settings.json
 ├── brainstorm/         # Project ideation documents
@@ -38,7 +44,14 @@ inclusion: always
 │   ├── AccessControl.sol
 │   ├── AuditTrail.sol
 │   └── MedicalRecords.sol
-├── figma 2025.pdf      # Design specifications
+├── images/             # Project images and assets
+│   └── Equipo.jpeg
+├── Information/        # Project documentation and requirements
+│   ├── Idea 2.pdf
+│   ├── Idea 2.txt
+│   └── Mas detalles.txt
+├── mocks/              # Design mockups and prototypes
+│   └── FIGMA PRIMERA PARTE.pdf
 ├── frontend/           # Scaffold-ETH 2 monorepo structure
 │   ├── .cursor/        # Cursor IDE configuration
 │   │   └── rules/
@@ -119,18 +132,14 @@ inclusion: always
 │   │       │   ├── debug/              # Contract debugging interface
 │   │       │   │   ├── _components/    # Debug components
 │   │       │   │   └── page.tsx
-│   │       │   ├── hospital/           # Hospital/Insurance company portal
+│   │       │   ├── hospital/           # Hospital portal for medical record access
 │   │       │   │   ├── assessments/    # Hospital risk assessment and underwriting
 │   │       │   │   │   ├── new/        # New assessment creation
 │   │       │   │   │   │   └── page.tsx
 │   │       │   │   │   └── page.tsx    # Assessment list
 │   │       │   │   └── page.tsx        # Hospital dashboard home
-│   │       │   ├── insurance/          # Insurance company portal (planned - not yet implemented)
-│   │       │   │   ├── assessments/    # Risk assessment and underwriting (planned)
-│   │       │   │   │   ├── new/        # New assessment creation (planned)
-│   │       │   │   │   │   └── page.tsx
-│   │       │   │   │   └── page.tsx    # Assessment list (planned)
-│   │       │   │   └── page.tsx        # Insurance dashboard home (planned)
+│   │       │   ├── insurance/          # Insurance company compliance portal
+│   │       │   │   └── page.tsx        # Insurance compliance dashboard
 │   │       │   ├── patient/            # Patient dashboard and management
 │   │       │   │   ├── activity/       # Patient activity and audit logs
 │   │       │   │   │   └── page.tsx
@@ -150,7 +159,7 @@ inclusion: always
 │   │       │   │   └── page.tsx        # Specialist dashboard home
 │   │       │   ├── layout.tsx
 │   │       │   ├── not-found.tsx
-│   │       │   └── page.tsx            # Landing page with role-based navigation
+│   │       │   └── page.tsx            # HISTOBIT landing page with Spanish UI and role-based navigation
 │   │       ├── components/     # React components
 │   │       │   ├── assets/
 │   │       │   ├── scaffold-eth/
@@ -221,23 +230,29 @@ inclusion: always
 
 **Key Observations:**
 - Project has successfully migrated to Scaffold-ETH 2 architecture with Yarn 3.2.3 workspaces
+- HISTOBIT branding implemented with Spanish language interface for LATAM market
 - Smart contracts are located in both legacy `contracts/` and active `frontend/packages/hardhat/contracts/`
-- Complete Next.js 15 frontend with role-based routing (patient, specialist, hospital, insurance)
+- Complete Next.js 15 frontend with role-based routing (patient, specialist, hospital)
 - TypeScript integration with auto-generated contract types in `typechain-types/`
 - Comprehensive development tooling (ESLint, Prettier, Husky, lint-staged)
 - Yarn workspaces for monorepo management with proper dependency isolation
 - Legacy structure maintained for backward compatibility and migration reference
 - Kiro IDE integration with specifications and steering documents
+- Insurance portal implemented with compliance and audit functionality
 
 **Recent Additions:**
+- HISTOBIT branding with Spanish language interface for LATAM market focus
 - Patient activity logging system with comprehensive audit trail interface
 - Hospital portal with complete risk assessment and policy underwriting framework
-- Enhanced portal structure with dedicated hospital company functionality
+- Insurance portal with compliance and audit functionality for risk assessment oversight
+- Enhanced portal structure with dedicated hospital and insurance company functionality
 - Activity filtering and export capabilities for compliance reporting
 - Complete hospital assessment workflow with 4-step process (Patient Search, Record Selection, Risk Analysis, Review & Submit)
 - Interactive risk assessment interface with real-time risk score calculation
 - Comprehensive assessment review system with patient information and selected records display
 - Progress tracking system with visual step indicators and validation
+- Updated landing page with modern gradient design and Spanish UI elements
+- Insurance compliance dashboard with audit trail viewing and risk assessment statistics
 
 ### Implementation Status & Next Steps
 
@@ -251,12 +266,12 @@ inclusion: always
 - ✅ TypeScript contract type generation with typechain
 - ✅ Deployment scripts for all medical records contracts
 - ✅ Development tooling (ESLint, Prettier, Husky git hooks, lint-staged)
-- ✅ Landing page with role-based navigation structure
+- ✅ HISTOBIT landing page with Spanish UI and role-based navigation structure
 - ✅ Patient portal structure with records, permissions, upload, and activity monitoring
 - ✅ Patient activity logging interface with comprehensive audit trail
 - ✅ Specialist portal with patient management and dynamic record viewing
 - ✅ Hospital portal with risk assessment and policy underwriting framework
-- 🚧 Insurance portal with risk assessment and policy underwriting framework (planned)
+- ✅ Insurance portal with compliance and audit functionality
 - ✅ Complete hospital assessment workflow with multi-step interface
 - ✅ Interactive risk assessment tools with real-time calculations
 - ✅ Comprehensive project specifications and requirements documentation
@@ -268,7 +283,7 @@ inclusion: always
 - Scalable component organization by user role
 - Automated contract type generation for type safety
 - Dynamic routing for patient-specific specialist workflows
-- Comprehensive portal structure for all user types (patients, specialists, hospitals, insurance) with assessment capabilities
+- Comprehensive portal structure for all user types (patients, specialists, hospitals, insurance) with assessment and compliance capabilities
 - Complete audit trail system with activity logging and filtering
 - Risk assessment framework for insurance underwriting
 - Responsive design with Tailwind CSS and DaisyUI components
@@ -283,9 +298,7 @@ inclusion: always
 - **Hospital Portal** (`/hospital`): Complete hospital-based medical record access with comprehensive risk assessment functionality
   - `/hospital/assessments`: Assessment management and history
   - `/hospital/assessments/new`: Complete 4-step risk assessment workflow (Patient Search → Record Selection → Risk Analysis → Review & Submit)
-- **Insurance Portal** (`/insurance`): Risk assessment and policy underwriting functionality (planned - to mirror hospital portal)
-  - `/insurance/assessments`: Assessment management and history (planned)
-  - `/insurance/assessments/new`: New risk assessment creation (planned)
+- **Insurance Portal** (`/insurance`): Compliance and audit functionality with risk assessment overview
 - **Built-in Tools**: Block explorer (`/blockexplorer`) and contract debugging (`/debug`) for development
 
 **Next Development Priorities:**
@@ -293,8 +306,8 @@ inclusion: always
 2. **Encryption Services** (Task 4): Implement client-side ECIES encryption
 3. **IPFS Integration** (Task 5): Add document storage and retrieval
 4. **Portal Interface Development** (Tasks 7-10): Complete the UI functionality for remaining portals
-5. **Patient Activity System** (Task 8.3): Implement the activity logging and audit trail functionality
-6. **Insurance Portal Implementation** (Task 10): Create insurance portal mirroring hospital assessment workflow
+5. **Insurance Portal Enhancement** (Task 10): Expand insurance portal with additional assessment workflows
+6. **Patient Activity System** (Task 8.3): Implement the activity logging and audit trail functionality
 7. **Patient-Specialist Workflow** (Task 9): Implement the specialist record viewing and access request flows
 8. **Backend Integration**: Connect hospital assessment interface with smart contracts and IPFS storage
 
